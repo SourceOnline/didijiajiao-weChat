@@ -1,0 +1,50 @@
+{
+  "debug":true,
+  "pages":[
+    
+    "pages/index/index",
+    "pages/main/main",
+    "pages/logs/logs",
+    "pages/wxlogin/wxlogin",
+    "pages/login/login",
+    "pages/students/students",
+    "pages/teachers/teachers",
+    "pages/mine/mine",
+    "pages/user/user",
+    "pages/address/address",
+    "pages/publish/publish"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#37383c",
+    "navigationBarTitleText": "DiDi",
+    "navigationBarTextStyle": "white"
+  },
+ "tabBar": {
+  "color": "#a9b7b7",
+  "selectedColor": "#11cd6e",
+  "borderStyle": "white",
+  "list": [
+    {
+      "selectedIconPath": "images/index_icon.png",
+      "iconPath": "images/index_icon.png",
+      "pagePath": "pages/index/index",
+      "text": "找老师"
+    },
+    {
+      "selectedIconPath": "images/index_icon.png",
+      "iconPath": "images/index_icon.png",
+      "pagePath": "pages/main/main",
+      "text": "找学生"
+    }
+    ,
+    {
+      "selectedIconPath": "images/index_icon.png",
+      "iconPath": "images/index_icon.png",
+      "pagePath": "pages/mine/mine",
+      "text": "我的"
+    }
+  ]
+}
+
+}

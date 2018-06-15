@@ -1,0 +1,36 @@
+/* pages/mine/mine.wxss */
+.header {
+	background: #2d8cf0;
+	padding: 30rpx;
+}
+.header .avatar {
+	display: block;
+	margin: 0 auto;
+	width: 160rpx;
+	height: 160rpx;
+	border-radius: 50%;
+	border: 2px solid #fee767;
+}
+.header .nickname {
+	color: #000;
+	font-size: 22px;
+	line-height: 2.4;
+	text-align: center;
+}
+
+
+
+.row-class{
+    background: #fff;
+}
+.col-class{
+    height: 32px;
+    line-height: 32px;
+    color: #fff;
+    text-align: center;
+    background: #2d8cf0;
+    font-size: 12px;
+}
+.col-class.light{
+    background: #5cadff;
+}

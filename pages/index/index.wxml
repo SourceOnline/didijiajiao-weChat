@@ -1,0 +1,52 @@
+<view class="wrapper">
+  <view class="page-body">
+    <view class="page-body-wrapper">
+      <form bindsubmit="openLocation">
+        <text>当前位置：{{localCity}}({{location.longitude}},{{location.latitude}})</text>
+        <view class="page-body-buttons">
+          <button class="page-body-button" type="primary" bindtap="chooseLocation">选择位置</button>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>
+
+<view class="container">
+<scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
+  <!--list-->
+  <view class="nav_section">
+    <view wx:if="{{teachers}}">
+        <block wx:for="{{teachers}}" wx:key="item.userId">
+            <view class="nav_section_items" >
+                <!--image-->
+                <view class="section_image" bindtap="navigateDetail" data-aid="{{item.userId}}">
+                <block wx:if="{{item.avatar}}">
+                    <image src="{{item.avatar}}" mode="aspectFill"></image>
+                </block>
+                <block wx:else>
+                    <image src="../../images/default_pic.png" mode="aspectFill"></image>
+                </block>
+                </view>
+                <!--content-->
+                <view class="section_cont" bindtap="navigateDetail" data-aid="{{item.userId}}">
+                    <view class="section_cont_sub">
+                        <text>{{item.userName}}</text>
+                    </view>
+                    <view class="section_cont_price">价格：{{item.price}}</view>
+                    <view>{{item.msg}}</view>
+                </view>
+                <!--book-->
+                <view class="section_book" bindtap="bookTap" data-aid="{{item.userId}}">
+                        <text>预约</text>
+                </view>
+            </view>
+            
+        </block>
+    </view>
+    
+    <view wx:else>暂无数据</view>
+
+</view>
+
+</scroll-view>
+</view>

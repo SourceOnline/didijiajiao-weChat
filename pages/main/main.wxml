@@ -1,0 +1,3 @@
+<i-button bind:click="handleClick" type="primary" bindtap="bindFindTeacher">找老师</i-button>
+<i-button bind:click="handleClick" type="primary" bindtap="bindFindStudent">找学生</i-button>
+<i-button bind:click="handleClick" type="primary" bindtap="bindAskForTeach">发布家教</i-button>

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "个人信息",
+  "usingComponents": {
+    "i-button": "../../dist/button/index",
+    "i-panel": "../../dist/panel/index"
+  }
+}
