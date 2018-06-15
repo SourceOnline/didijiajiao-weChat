@@ -11,6 +11,7 @@
     "pages/teachers/teachers",
     "pages/mine/mine",
     "pages/user/user",
+    "pages/order/order",
     "pages/address/address",
     "pages/publish/publish"
   ],

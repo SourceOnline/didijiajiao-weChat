@@ -91,7 +91,6 @@ Page({
             icon: 'success',
             duration: 2000
           })
-         wx.
         }
       }
     })

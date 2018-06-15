@@ -1,2 +1,14 @@
 <!--pages/address/address.wxml-->
 <text>pages/address/address.wxml</text>
+
+<i-button bind:click="handleClick" type="primary" bindtap="bindAdd">新增地址</i-button>
+
+<i-panel class="cell-panel-demo">
+    <i-cell title="单行列表"></i-cell>
+</i-panel>
+<i-panel class="cell-panel-demo">
+    <i-cell title="单行列表"></i-cell>
+</i-panel>
+<i-panel class="cell-panel-demo">
+    <i-cell title="单行列表"></i-cell>
+</i-panel>

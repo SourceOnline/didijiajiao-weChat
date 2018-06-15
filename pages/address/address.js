@@ -5,7 +5,49 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    switch1: true
+  },
+
+  onChange(event) {
+    const detail = event.detail;
+    this.setData({
+      'switch1': detail.value
+    })
+
+  },
+
+  bindAdd:function(){
+    var that = this
+    that.chooseLocation(null)
+  },
+
+  //地图选择位置
+  chooseLocation: function (e) {
+    console.log("地图选择位置")
+    console.log(e)
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
+        // success
+        console.log(res)
+        that.setData({
+          hasLocation: true,
+          location: {
+            longitude: res.longitude,
+            latitude: res.latitude
+          }
+        })
+        app.location.longitude = res.longitude
+        app.location.latitude = res.latitude
+        that.getCity();
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+      }
+    })
   },
 
   /**

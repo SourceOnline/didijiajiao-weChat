@@ -4,68 +4,24 @@
 		<image class="avatar" src="{{userInfo.avatarUrl}}" bindtap="bindToUser"/>
 		<view class="nickname">{{userInfo.nickName}}</view>
 	</view>
-  <i-grid>
-    <i-row>
-        <i-grid-item bindtap="bindOrder">
-            <i-grid-icon>
-                <i-icon size="24" type="activity" />
-                <i-grid-label>订单</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-        <i-grid-item>
-            <i-grid-icon>
-                <i-icon size="24" type="addressbook" />
-                <i-grid-label>宫格</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-        <i-grid-item>
-            <i-grid-icon>
-                <i-icon size="24" type="barrage" />
-                <i-grid-label>宫格</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-    </i-row>
-    <i-row>
-        <i-grid-item>
-            <i-grid-icon>
-                <i-icon size="24" type="collection" />
-                <i-grid-label>宫格</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-        <i-grid-item>
-            <i-grid-icon>
-                <i-icon size="24" type="computer" />
-                <i-grid-label>宫格</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-        <i-grid-item>
-            <i-grid-icon>
-                <i-icon size="24" type="coupons" />
-                <i-grid-label>宫格</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-    </i-row>
-    <i-row>
-        <i-grid-item>
-            <i-grid-icon>
-                <i-icon size="24" type="flag" />
-                <i-grid-label>宫格</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-        <i-grid-item>
-            <i-grid-icon>
-                <i-icon size="24" type="interactive" />
-                <i-grid-label>宫格</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-        <i-grid-item>
-            <i-grid-icon>
-                <i-icon size="24" type="mail" />
-                <i-grid-label>宫格</i-grid-label>
-            </i-grid-icon>
-        </i-grid-item>
-    </i-row>
-</i-grid>
+  
+  <swiper class="section icons" indicator-dots="true" autoplay="" interval="" duration="500">
+		<swiper-item >
+
+			<view class="icon"  bindtap="bindOrder">
+				<image src="../../images/index_icon.png"/>
+				<text>我的订单</text>
+			</view>
+
+			<view class="icon"  bindtap="bindToAddress">
+				<image src="../../images/index_icon.png"/>
+				<text>常用地址</text>
+			</view>
+      
+
+
+		</swiper-item>
+	</swiper>
 
   <!-- <i-button bind:click="handleClick" type="primary" bindtap="bindJustIn">进入</i-button>
   <i-button bind:click="handleClick" type="primary" bindtap="bindLogoinIn">登陆</i-button> -->

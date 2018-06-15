@@ -1,46 +1,18 @@
-// pages/mine/mine.js
-//获取应用实例
-const app = getApp()
-
+// pages/order/order.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+  
   },
 
-  //事件转跳用户详情
-  bindToUser:function(){
-    wx.navigateTo({
-      url: '../user/user',
-    })
-  },
-  //事件转跳订单详情
-  bindOrder: function () {
-    wx.navigateTo({
-      url: '../order/order',
-    })
-  },
-  //事件转跳地址
-  bindToAddress: function () {
-    wx.navigateTo({
-      url: '../address/address',
-    })
-  },
-    /**
+  /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    }
+  onLoad: function (options) {
+  
   },
 
   /**
