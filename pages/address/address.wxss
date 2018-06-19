@@ -1,1 +1,16 @@
 /* pages/address/address.wxss */
+
+.a_gruop {
+flex-direction:row;
+justify-content:space-between;
+padding:30rpx;
+border-bottom:2rpx solid #ddd;
+position:relative;
+}
+
+.a_detial{
+  width:400rpx;
+font-size:26rpx;
+color:#a9a9a9;
+
+}

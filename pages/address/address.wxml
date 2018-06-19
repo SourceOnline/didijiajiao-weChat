@@ -1,14 +1,13 @@
 <!--pages/address/address.wxml-->
-<text>pages/address/address.wxml</text>
 
 <i-button bind:click="handleClick" type="primary" bindtap="bindAdd">新增地址</i-button>
 
-<i-panel class="cell-panel-demo">
-    <i-cell title="单行列表"></i-cell>
-</i-panel>
-<i-panel class="cell-panel-demo">
-    <i-cell title="单行列表"></i-cell>
-</i-panel>
-<i-panel class="cell-panel-demo">
-    <i-cell title="单行列表"></i-cell>
-</i-panel>
+<view class="a_gruop a_head">
+  地址收藏
+</view>
+<view wx:if="{{addressList}}">
+  <block wx:for="{{addressList}}" wx:key="item.addressId">
+    <view class="a_gruop" bindtap="test" data-aid="{{item.addressId}}">{{item.message}}({{item.longitude}},{{item.latitude}})
+    </view>
+  </block>
+</view>
