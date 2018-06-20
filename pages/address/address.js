@@ -15,7 +15,7 @@ Page({
 
   bindAdd:function(){
     var that = this
-    that.chooseLocation(null)
+    that.chooseLocation()
   },
 
   test:function(e){
@@ -24,23 +24,13 @@ Page({
   },
 
   //地图选择位置
-  chooseLocation: function (e) {
+  chooseLocation: function () {
     console.log("地图选择位置")
-    console.log(e)
     var that = this
     wx.chooseLocation({
       success: function (res) {
         // success
         console.log(res)
-        // that.setData({
-        //   hasLocation: true,
-        //   location: {
-        //     longitude: res.longitude,
-        //     latitude: res.latitude,
-        //     name: res.name,
-        //     address: res.address
-        //   }
-        // })
         that.setHome(res)
       },
       fail: function () {
@@ -71,6 +61,7 @@ Page({
         if (res == null || res.data == null) {
           reject(new Error('网络请求失败'))
         }
+        that.onLoad()
       },
       success: function (res) {
         if (res.data.status == 1) {

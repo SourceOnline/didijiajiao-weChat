@@ -41,6 +41,7 @@ App({
     user:null,
     URL_PATH: 'http://localhost:8012',
     token: 'fc6e0ed6-bb4d-41e4-9617-eb5c3fdbd4bf'//abc
+    //585e130a-dd15-434b-b612-e85427160822   //cc
   },
   QQMapWXKey: 'A75BZ-VXF6W-V7CRU-OP2CO-XZMZF-4GFEX',
   location: {

@@ -1,6 +1,6 @@
 <!--pages/address/address.wxml-->
 
-<i-button bind:click="handleClick" type="primary" bindtap="bindAdd">新增地址</i-button>
+<i-button bind:click="handleClick" type="primary" bindtap="bindAdd">新增/修改地址</i-button>
 
 <view class="a_gruop a_head">
   地址收藏

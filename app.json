@@ -9,6 +9,8 @@
     "pages/login/login",
     "pages/students/students",
     "pages/teachers/teachers",
+    "pages/teaDetail/teaDetail",
+    "pages/book/book",
     "pages/mine/mine",
     "pages/user/user",
     "pages/order/order",

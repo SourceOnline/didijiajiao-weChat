@@ -22,11 +22,12 @@ Page({
     var that = this;
     //获取当前经纬度
     that.getLocation()
-    that.findTeacher(null)
+    
   },
   onShow: function () {
     var that = this
     that.getCity();
+    that.findTeacher();
   },
   //设置城市
   getCity:function(){
@@ -58,11 +59,10 @@ Page({
 
   //获取经纬度
   getLocation: function (e) {
-    console.log(e)
     var that = this
     wx.getLocation({
       //type：wgs84(是全球定位系统，获取的坐标，gcj02是国家测绘局给出的坐标)
-      type: 'wgs84',// 默认wgs84
+      type: 'gcj02',// 默认wgs84
       success: function (res) {
         // success
         console.log("获取经纬度")
@@ -84,7 +84,6 @@ Page({
   //地图选择位置
   chooseLocation: function (e) {
     console.log("地图选择位置")
-    console.log(e)
     var that = this
     wx.chooseLocation({
       success: function (res) {
@@ -113,7 +112,7 @@ Page({
   // 跳转至详情页
   navigateDetail: function (e) {
     wx.navigateTo({
-      url: '../detail/detail?artype=' + e.currentTarget.dataset.artype
+      url: '../teaDetail/teaDetail?uid=' + e.currentTarget.dataset.uid
     })
   },
 
@@ -134,16 +133,17 @@ Page({
   // book预约
   bookTap: function (e) {
     wx.navigateTo({
-      url: '../book/book?aid=' + e.currentTarget.dataset.aid
+      url: '../book/book?uid=' + e.currentTarget.dataset.uid
     })
   },
 
   //获取周边教员
-  findTeacher: function (e) {
+  findTeacher: function () {
+    console.log("获取周边教师")
     var that = this;
-    var longitude = 123;//经度，浮点
-    var latitude = 45;//维度，浮点
-    if (longitude.length == 0 || latitude.length == 0) {
+    var lon = app.location.longitude;//经度，浮点
+    var lat = app.location.latitude;//维度，浮点
+    if (lon.length == 0 || lat.length == 0) {
       wx.showToast({
         title: '未能定位到当前位置',
         icon: 'loading',
@@ -151,12 +151,11 @@ Page({
       })
     } else {
       var HOST = app.globalData.URL_PATH;
-      console.log(HOST)
       wx.request({
         url: HOST + '/api/order/findTeacher',
         data: {
-          longitude: longitude,
-          latitude: latitude,
+          longitude: lon,
+          latitude: lat,
           token: app.globalData.token
         },
         method: "GET",

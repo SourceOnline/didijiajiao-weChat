@@ -1,28 +1,35 @@
 <!--pages/mine/mine.wxml-->
 <view class="container">
-	<view class="header">
-		<image class="avatar" src="{{userInfo.avatarUrl}}" bindtap="bindToUser"/>
-		<view class="nickname">{{userInfo.nickName}}</view>
-	</view>
-  
-  <swiper class="section icons" indicator-dots="true" autoplay="" interval="" duration="500">
-		<swiper-item >
+  <view class="header">
+    <image class="avatar" src="{{userInfo.avatarUrl}}" bindtap="bindToUser" />
+    <view class="nickname">{{userInfo.nickName}}</view>
+  </view>
 
-			<view class="icon"  bindtap="bindOrder">
-				<image src="../../images/index_icon.png"/>
-				<text>我的订单</text>
-			</view>
+  <view class="i-grid">
 
-			<view class="icon"  bindtap="bindToAddress">
-				<image src="../../images/index_icon.png"/>
-				<text>常用地址</text>
-			</view>
-      
+    <view class="i-row">
+      <view class="i-grid-item" style="width: 33.33%" bindtap="bindOrder">
+        <view class="i-grid-icon">
+          <image src="../../images/index_icon.png" />
+        </view>
+        <view class="i-grid-label">订单</view>
+      </view>
+
+      <view class="i-grid-item" style="width: 33.33%" bindtap="bindToAddress">
+        <view class="i-grid-icon">
+          <image src="../../images/index_icon.png" />
+        </view>
+        <view class="i-grid-label">地址</view>
+      </view>
+
+      <view class="i-grid-item" style="width: 33.33%">
+        <view class="i-grid-icon">
+          <image src="../../images/index_icon.png" />
+        </view>
+        <view class="i-grid-label">宫格</view>
+      </view>
+    </view>
 
 
-		</swiper-item>
-	</swiper>
-
-  <!-- <i-button bind:click="handleClick" type="primary" bindtap="bindJustIn">进入</i-button>
-  <i-button bind:click="handleClick" type="primary" bindtap="bindLogoinIn">登陆</i-button> -->
+  </view>
 </view>
