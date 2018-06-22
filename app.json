@@ -5,7 +5,7 @@
     "pages/index/index",
     "pages/main/main",
     "pages/logs/logs",
-    "pages/wxlogin/wxlogin",
+   "pages/wxlogin/wxlogin",
     "pages/login/login",
     "pages/students/students",
     "pages/teachers/teachers",
@@ -18,10 +18,11 @@
     "pages/publish/publish"
   ],
   "window": {
-    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#37383c",
     "navigationBarTitleText": "DiDi",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#f9f9f9"
   },
  "tabBar": {
   "color": "#a9b7b7",

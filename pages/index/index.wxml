@@ -20,12 +20,13 @@
             <view class="nav_section_items" >
                 <!--image-->
                 <view class="section_image" bindtap="navigateDetail" data-uid="{{item.userId}}">
-                <block wx:if="{{item.avatar}}">
+                <!-- <block wx:if="{{item.avatar}}">
                     <image src="{{item.avatar}}" mode="aspectFill"></image>
                 </block>
                 <block wx:else>
                     <image src="../../images/default_pic.png" mode="aspectFill"></image>
-                </block>
+                </block> -->
+                <image src="../../images/default_pic.png" mode="aspectFill"></image>
                 </view>
                 <!--content-->
                 <view class="section_cont" bindtap="navigateDetail" data-uid="{{item.userId}}">

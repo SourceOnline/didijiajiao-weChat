@@ -1,16 +1,69 @@
 <!--pages/book/book.wxml-->
-<i-panel title="基础用法">
-    <i-input value="{{ value1 }}" title="收货人" autofocus placeholder="名字" />
-    <i-input value="{{ value2 }}" type="number" title="联系电话" placeholder="请输入手机号" />
-    <i-input value="{{ value3 }}" type="textarea" title="详细地址" placeholder="请输入详细地址(最多50字)" maxlength="50" />
-    <i-input value="{{ value4 }}" title="用户信息" disabled />
-</i-panel>
 
-<i-panel title="无标题输入框">
-    <i-input value="{{ value5 }}" placeholder="请输入收货人姓名" />
-</i-panel>
+<view class="ar_brock"></view>
 
-<i-panel title="圆角输入框">
-    <i-input value="{{ value6 }}" type="number" right title="消费总额" mode="wrapped" placeholder="询问收银员后输入" />
-    <i-input value="{{ value7 }}" type="number" right error title="不参与优惠金额" mode="wrapped" placeholder="询问收银员后输入" />
-</i-panel>
+<view class="i-panel">
+  <view class="i-panel-title">个人信息</view>
+  <view class="i-panel-content">
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">联系人</view>
+      <input class="i-input-input i-cell-bd" maxlength="10" placeholder="名字" type="text" value="{{ userName }}" bindinput="userNameInput">
+      </input>
+    </view>
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">联系电话</view>
+      <input class="i-input-input i-cell-bd" maxlength="20" placeholder="请输入手机号码" type="text" value="{{ phone }}" bindinput="phoneInput">
+      </input>
+    </view>
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">详细地址</view>
+      <picker bindchange="bindAddrPickerChange" value="{{addrIndex}}" range="{{address}}">
+        <text>{{addressList[addrIndex].message}}</text>
+      </picker>
+    </view>
+
+  </view>
+</view>
+
+<view class="i-panel">
+  <view class="i-panel-title">学员信息</view>
+  <view class="i-panel-content">
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">科目</view>
+      <input class="i-input-input i-cell-bd" maxlength="10" placeholder="语文" type="text" value="{{ subject }}" bindinput="subjectInput">
+      </input>
+    </view>
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">年级</view>
+      <input class="i-input-input i-cell-bd" maxlength="10" placeholder="年级"  type="text" value="{{ grade }}" bindinput="gradeInput">
+      </input>
+    </view>
+
+  </view>
+</view>
+
+<view class="i-panel">
+  <view class="i-panel-title">教员信息</view>
+  <view class="i-panel-content">
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">上课时间</view>
+      <input class="i-input-input i-cell-bd" maxlength="50" placeholder="每周六下午2点到4点，2周一次" type="text" value="{{ learnTime }}" bindinput="timeInput">
+      </input>
+    </view>
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">收费要求</view>
+      <input class="i-input-input i-cell-bd" maxlength="50" placeholder="x元/小时，x元/天" type="text" value="{{ price }}" bindinput="priceInput">
+      </input>
+    </view>
+
+  </view>
+</view>
+
+<i-button bind:click="handleClick" type="primary" bindtap="bindBook">提交</i-button>

@@ -5,19 +5,45 @@
 <view class="i-card">
   <view class="i-card-header">
     <view class="i-card-header-content">
-      <image class="i-card-header-thumb" mode="aspectFit" src="{{HOST}}{{teacherDeatil.avatar}}"></image>
-      {{teacherDeatil.userame}}
+      <!-- <block wx:if="{{teacherDeatil.avatar}}">
+        <image class="i-card-header-thumb" src="{{teacherDeatil.avatar}}" mode="aspectFit"></image>
+      </block>
+      <block wx:else>
+        <image class="i-card-header-thumb" mode="aspectFit" src="../../images/default_pic.png"></image>
+      </block> -->
+      <image class="i-card-header-thumb" mode="aspectFit" src="../../images/default_pic.png"></image>
+      {{teacherDeatil.userName}}
     </view>
-    <view class="i-card-header-extra">状态</view>
+    <view class="i-card-header-extra">职称</view>
   </view>
-  <view class="i-card-body">内容不错</view>
-  <view class="i-card-footer">尾部内容</view>
+  <view class="i-card-body">教龄X年|已授课n课</view>
+  <view class="i-card-body2">价格：100元/小时</view>
+  <view class="i-card-footer">小升初 奥数 基础提升</view>
+</view>
+<view class="card-top"></view>
+<view class="i-card">
+  <view class="i-card-header">
+    <view class="i-card-header-content">
+      学生评价
+    </view>
+  </view>
+  <view class="i-card-body">
+    <view class="i-card-evaluate">
+      <view class="i-card-body-user">用户 :
+        <text decode="{{true}}">&nbsp;&nbsp;</text>
+      </view>
+      <view class="i-card-footer-user">评价内容</view>
+    </view>
+
+    <view>查看全部(234)</view>
+  </view>
+
 </view>
 
-<i-button bind:click="handleClick" type="primary" bindtap="bookTap" data-uid="{{item.userId}}">预约</i-button>
+<i-button bind:click="handleClick" type="primary" bindtap="bookTap" data-uid="{{userId}}">预约</i-button>
 
 <!-- <view>
   图片、教师信息
   学生评价 教学特点 毕业院校 教学经历 教过学生 成功案例 教学心得 收藏、咨询
+  学校
 </view> -->
-

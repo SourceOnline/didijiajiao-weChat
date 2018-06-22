@@ -61,6 +61,12 @@
   font-size: 14px;
 }
 
+.i-card-body2 {
+  padding: 6px 16px;
+  color: #495060;
+  font-size: 14px;
+}
+
 .i-card-body::before {
   content: '';
   position: absolute;
@@ -83,6 +89,24 @@
   font-size: 12px;
 }
 
-.card-top{
+.card-top {
   margin: 15px;
+}
+
+.i-card-evaluate {
+  
+}
+
+.i-card-body-user {
+
+  color: #495060;
+  font-size: 14px;
+  float: left;
+}
+
+.user-i-card-footer-usermsg {
+
+  color: #80848f;
+  font-size: 12px;
+  float: left;
 }

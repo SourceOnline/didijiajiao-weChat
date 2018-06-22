@@ -26,7 +26,7 @@ Page({
   //事件:转跳发布家教任务
   bindAskForTeach: function () {
     wx.navigateTo({
-      url: '../publish/publish'
+      url: '../book/book'
     })
   },
 

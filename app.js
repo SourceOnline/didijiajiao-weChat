@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -21,7 +21,7 @@ App({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log("获取用户信息")
+              console.log("获取用户信息wechat")
               console.log(res.userInfo)
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
@@ -36,16 +36,18 @@ App({
       }
     })
   },
+
   globalData: {
     userInfo: null,
-    user:null,
+    user: null,
     URL_PATH: 'http://localhost:8012',
-    token: 'fc6e0ed6-bb4d-41e4-9617-eb5c3fdbd4bf'//abc
+    token: 'fc6e0ed6-bb4d-41e4-9617-eb5c3fdbd4bf' //abc
     //585e130a-dd15-434b-b612-e85427160822   //cc
   },
+
   QQMapWXKey: 'A75BZ-VXF6W-V7CRU-OP2CO-XZMZF-4GFEX',
   location: {
-    longitude: 114.38273,
-    latitude: 23.08383
+    longitude: 115.38273,
+    latitude: 24.08383
   }
 })

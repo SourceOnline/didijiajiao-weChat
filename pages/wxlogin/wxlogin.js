@@ -8,9 +8,12 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  //事件处理函数
+  //事件处理函数-授权登陆
   bindViewTap: function () {
-    wx.navigateBack()
+    this.getDiDiUserInfo()
+    // wx.redirectTo({
+    //   url: '../index/index'
+    // })
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -47,6 +50,42 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    wx.navigateBack()
+    // wx.navigateBack()
+    this.getDiDiUserInfo()
+  },
+  //获取app用户信息并登陆转跳首页
+  getDiDiUserInfo: function () {
+    var HOST = app.globalData.URL_PATH;
+    var token = app.globalData.token;
+    wx.request({
+      url: HOST + '/api/user/getUser',
+      data: {
+        token: token
+      },
+      method: "GET",
+      complete: function (res) {
+        console.log(res.data)
+        if (res == null || res.data == null) {
+          reject(new Error('网络请求失败'))
+        }
+      },
+      success: function (res) {
+        if (res.data.status == 1) {
+          app.globalData.user = res.data.data.user
+          console.log("获取用户信息app")
+          console.log(app.globalData.user)
+
+          wx.showToast({
+            title: '欢迎您：' + res.data.data.user.name,
+            icon: 'success',
+            duration: 2000
+          })
+          wx.navigateBack()
+          // wx.redirectTo({
+          //   url: '../index/index'
+          // })
+        }
+      }
+    })
   }
 })

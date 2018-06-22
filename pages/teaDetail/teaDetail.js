@@ -14,14 +14,10 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    that.teacherDetail(options.uid)
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+    console.log(options.uid)
+    if (null != options.uid){
+      that.teacherDetail(options.uid)
+    }
   },
 
   // book预约
@@ -31,7 +27,7 @@ Page({
     })
   },
 
-  //获取周边教员
+  //获取教员详细信息
   teacherDetail: function (userId) {
     console.log("获取教师信息")
     var that = this;
@@ -46,7 +42,8 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          teacherDeatil: res.data.data.teacher
+          teacherDeatil: res.data.data.teacher,
+          userId:userId
         })
       }
     })

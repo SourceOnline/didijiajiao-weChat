@@ -7,30 +7,27 @@ var qqmapsdk;
 
 Page({
   data: {
-    localCity:null,
+    localCity: null,
     //默认未获取地址
     hasLocation: false,
   },
   onLoad: function () {
-    console.log(app.globalData.userInfo)
     //检测用户登陆
-    // if (!app.globalData.userInfo) {
-    //   wx.navigateTo({
-    //     url: '../wxlogin/wxlogin'
-    //   })
-    // }
-    var that = this;
-    //获取当前经纬度
-    that.getLocation()
-    
+    if (!app.globalData.userInfo) {
+      wx.navigateTo({
+        url: '../wxlogin/wxlogin'
+      })
+    }
   },
   onShow: function () {
     var that = this
     that.getCity();
     that.findTeacher();
+    //获取当前经纬度
+    that.getLocation()
   },
   //设置城市
-  getCity:function(){
+  getCity: function () {
     var that = this
     qqmapsdk = new QQMapWX({
       key: app.QQMapWXKey // 必填
@@ -39,11 +36,12 @@ Page({
     qqmapsdk.reverseGeocoder({
       location: {
         latitude: app.location.latitude,
-        longitude: app.location.longitude
+        longitude: app.location.longitude,
+        get_poi: 0 //是否返回周边POI列表：1.返回；0不返回(默认)
       },
       success: function (res) {
-        console.log("获取城市")
-        console.log(res)
+        // console.log("获取城市")
+        // console.log(res)
         that.setData({
           localCity: res.result.address_component.city
         })
@@ -65,8 +63,8 @@ Page({
       type: 'gcj02',// 默认wgs84
       success: function (res) {
         // success
-        console.log("获取经纬度")
-        console.log(res)
+        // console.log("获取经纬度")
+        // console.log(res)
         that.setData({
           hasLocation: true,
           location: {
@@ -83,12 +81,9 @@ Page({
 
   //地图选择位置
   chooseLocation: function (e) {
-    console.log("地图选择位置")
     var that = this
     wx.chooseLocation({
       success: function (res) {
-        // success
-        console.log(res)
         that.setData({
           hasLocation: true,
           location: {
@@ -129,7 +124,7 @@ Page({
       list: that.data.navSectionItems,
     })
   },
-  
+
   // book预约
   bookTap: function (e) {
     wx.navigateTo({
@@ -139,7 +134,6 @@ Page({
 
   //获取周边教员
   findTeacher: function () {
-    console.log("获取周边教师")
     var that = this;
     var lon = app.location.longitude;//经度，浮点
     var lat = app.location.latitude;//维度，浮点
@@ -160,7 +154,6 @@ Page({
         },
         method: "GET",
         success: function (res) {
-          console.log(res)
           that.setData({
             teachers: res.data.data.teachers
           })
