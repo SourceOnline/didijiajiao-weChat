@@ -1,0 +1,29 @@
+<!--pages/addressAdd/addressAdd.wxml-->
+<view class="container edit_wrap">
+  <form bindsubmit="submitForm" id="123">
+    <view class="form_group">
+      <text>姓名：</text>
+      <input type="text" placeholder="请输入姓名" placeholder-class="placeholder_style" name="data_name" value="{{data_name}}" />
+    </view>
+    <view class="form_group">
+      <text>电话：</text>
+      <input type="text" placeholder="请输入联系电话" placeholder-class="placeholder_style" name="data_phone" value="{{data_phone}}" />
+    </view>
+    <view class="form_group">
+      <text>地址：</text>
+      <view class="street-num" bindtap="chooseLocation">
+        {{data_addr_name}}
+        <text decode="{{true}}">&nbsp;&nbsp;</text> 
+        <!-- {{data_addr_detail}} -->
+      </view>
+      <!-- <input type="text" name="data_door" value="{{data_addr_name}}{{data_addr_detail}}" /> -->
+    </view>
+
+    <view class="form_group">
+      <text></text>
+      <input type="text" placeholder="门号,如：A栋302" placeholder-class="placeholder_style" name="data_door" value="{{data_door}}" />
+    </view>
+    <button class="save_btn" formType="submit">保存</button>
+  </form>
+</view>
+

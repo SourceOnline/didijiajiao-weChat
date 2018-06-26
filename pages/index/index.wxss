@@ -20,39 +20,59 @@
   margin-top: 20px;
 }
 
+/**
+头部
+*/
+.header {
+	position: fixed;
+	display: -webkit-flex;
+	left: 0;
+	top: 0;
+	width: 100%;
+	padding: 20rpx;
+	box-sizing: border-box;
+	z-index: 1;
+	-webkit-transition: background 0.5s ease-in-out;
+}
+.header.scrolled {
+	background: #feb70f;
+}
+.header .icon {
+	width: 40rpx;
+	height: 40rpx;
+	vertical-align: top;
+}
+.header .location {
+	color: #fff;
+	font-size: 30rpx;
+	line-height: 40rpx;
+	min-width: 100rpx;
+	max-width: 340rpx;
+	padding: 10rpx 20rpx 10rpx 10rpx;
+	border-radius: 30rpx;
+	background: rgba(0,0,0,0.3);
+	margin-right: 20rpx;
+	vertical-align: middle;
+}
+.header .search {
+	-webkit-flex: 1;
+	color: #888;
+	font-size: 30rpx;
+	line-height: 40rpx;
+	padding: 10rpx;
+	border-radius: 30rpx;
+	background: #fff;
+	/*border-bottom: 1rpx solid #aaa;*/
+}
 
-.wrapper{
-  height: 100%;
-  background:#fff;
+.bg-img-top{
+  height: 50px;
 }
-.page-body-form-value{
-  font-size: 14px;
-  color:darkturquoise;
-  font-weight: bold;
-  padding-left: 15px;
-  border: 1px solid rgb(72, 165, 131);
-  border-radius: 4px;
-  height: 30px;
-  line-height: 30px;
-}
-.page-body-form-key{
-  font-size:14px;
-  padding: 10px;
-  margin-top:15px;
-  font-family: "Microsoft Yahei";
-  font-weight: bold;
-  height: 30px;
-  line-height: 30px;
-}
-.page-body-button{
-  margin-top:20px;
-  line-height: 2;
-}
-
 
 /* 列表 */
 .nav_section{
     width:100%;
+    margin-top: 10px;
 }
 .nav_section_items{
     display:flex;

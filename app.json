@@ -15,6 +15,7 @@
     "pages/user/user",
     "pages/order/order",
     "pages/address/address",
+    "pages/addressAdd/addressAdd",
     "pages/publish/publish"
   ],
   "window": {

@@ -103,56 +103,20 @@ Page({
         console.log(res)
         if (res.data.status == 1) {
           wx.showToast({
-            title: "预约成功",
+            title: res.data.message,
             icon: 'success',
             duration: 2000
           })
-          wx.navigateBack({
-            delta : 3
-          })
+          setTimeout(function(){
+            wx.navigateBack({
+              delta: 3
+            })
+          }, 2000)
+          
         } else {
           wx.showToast({
             title: res.data.message,
             icon: 'none',
-            duration: 2000
-          })
-        }
-      }
-    })
-  },
-
-  //处理数据-上传家位置
-  setHome: function(location) {
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
-    var that = this;
-    wx.request({
-      url: HOST + '/api/address/setHome',
-      data: {
-        longitude: location.longitude,
-        latitude: location.latitude,
-        message: location.address,
-        token: token
-      },
-      method: "GET",
-      complete: function(res) {
-        console.log(res.data)
-        if (res == null || res.data == null) {
-          reject(new Error('网络请求失败'))
-        }
-        that.onLoad()
-      },
-      success: function(res) {
-        if (res.data.status == 1) {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'success',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'error',
             duration: 2000
           })
         }

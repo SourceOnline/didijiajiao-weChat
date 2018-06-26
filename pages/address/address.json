@@ -4,7 +4,8 @@
     "i-cell": "../../dist/cell/index",
     "i-cell-group": "../../dist/cell-group/index",
     "i-panel": "../../dist/panel/index",
-    "i-icon": "../../dist/icon/index",
-    "i-button": "../../dist/button/index"
+    "i-modal": "../../dist/modal/index",
+    "i-button": "../../dist/button/index",
+    "i-message": "../../dist/message/index"
   }
 }

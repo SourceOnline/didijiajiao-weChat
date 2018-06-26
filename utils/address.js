@@ -8,7 +8,7 @@ function packAddress(arr) {
     //   let phone = arr[i].phone
     //   arr[i].phone = phone.replace(phone.substring(3, 7), '****')
     // }
-    newAddr[i] = arr[i].message
+    newAddr[i] = arr[i].addressNameAndDoor
   }
 
   return newAddr

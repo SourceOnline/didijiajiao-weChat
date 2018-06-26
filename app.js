@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function() {
+  onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -48,6 +48,8 @@ App({
   QQMapWXKey: 'A75BZ-VXF6W-V7CRU-OP2CO-XZMZF-4GFEX',
   location: {
     longitude: 115.38273,
-    latitude: 24.08383
+    latitude: 24.08383,
+    name: '未知地点',
+    address: '未知位置'
   }
 })

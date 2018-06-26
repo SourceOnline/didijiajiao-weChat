@@ -1,13 +1,30 @@
 <!--pages/address/address.wxml-->
 
-<i-button bind:click="handleClick" type="primary" bindtap="bindAdd">新增/修改地址</i-button>
-
-<view class="a_gruop a_head">
+<!-- <view class="a-gruop a-head">
   地址收藏
-</view>
+</view> -->
+
 <view wx:if="{{addressList}}">
   <block wx:for="{{addressList}}" wx:key="item.addressId">
-    <view class="a_gruop" bindtap="test" data-aid="{{item.addressId}}">{{item.message}}({{item.longitude}},{{item.latitude}})
+    <view class="i-cell i-cell-last">
+      <view class="i-cell-bd" bindtap="handleOpen" data-addressid="{{item.addressId}}">
+        <view class="i-cell-text" >{{item.addressNameAndDoor}}</view>
+        <!-- <view class="i-cell-text" >{{item.message}}</view> -->
+        <view class="i-cell-desc">{{item.nameAndhone}}</view>
+      </view>
+      <view class="i-icon i-icon-editor" style="font-size: 28px; color:#80848f" bindtap="bindEdit" data-addressid="{{item.addressId}}"></view>
     </view>
   </block>
 </view>
+
+<view class="i-cell-last-add">
+  <view class="last-add" bindtap="bindAdd">新增地址 +</view>
+</view>
+
+<!-- <i-button bind:click="handleOpen">无标题对话框</i-button> -->
+
+<i-modal visible="{{ visible }}" bind:ok="handleSure" bind:cancel="handleClose" data-addressid="{{addressid}}">
+    <view>删除后无法恢复，确认删除？</view>
+</i-modal>
+
+<!-- <i-message id="message" /> -->

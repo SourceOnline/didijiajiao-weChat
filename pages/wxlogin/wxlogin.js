@@ -11,9 +11,6 @@ Page({
   //事件处理函数-授权登陆
   bindViewTap: function () {
     this.getDiDiUserInfo()
-    // wx.redirectTo({
-    //   url: '../index/index'
-    // })
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -64,7 +61,6 @@ Page({
       },
       method: "GET",
       complete: function (res) {
-        console.log(res.data)
         if (res == null || res.data == null) {
           reject(new Error('网络请求失败'))
         }

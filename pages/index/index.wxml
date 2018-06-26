@@ -1,4 +1,6 @@
-<view class="wrapper">
+<view class="container">
+
+<!-- <view class="wrapper">
   <view class="page-body">
     <view class="page-body-wrapper">
       <form bindsubmit="openLocation">
@@ -9,45 +11,60 @@
       </form>
     </view>
   </view>
+</view> -->
+
+<view class="header">
+  <view class="location ellipsis" bindtap="">
+    <image class="icon" src="../../images/icon_location.png" /> {{localCity}}
+  </view>
+  <!-- <view class="search" bindtap="tapSearch">
+    <image class="icon" src="../../images/icon_search.png" />
+    <i class="fa fa-home"></i>
+    烤鸭
+  </view> -->
 </view>
 
-<view class="container">
-<scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
-  <!--list-->
-  <view class="nav_section">
-    <view wx:if="{{teachers}}">
+<image class="bg-img-top" src="../../images/background-top-1.jpg"/>
+
+<button class="page-body-button" type="primary" bindtap="bindJustFindTeacher">一键找老师</button>
+
+
+  <scroll-view scroll-y="true" class="page-body" bindscrolltolower="loadMore">
+    <!--list-->
+    <view class="nav_section">
+      <view wx:if="{{teachers}}">
         <block wx:for="{{teachers}}" wx:key="item.userId">
-            <view class="nav_section_items" >
-                <!--image-->
-                <view class="section_image" bindtap="navigateDetail" data-uid="{{item.userId}}">
-                <!-- <block wx:if="{{item.avatar}}">
+          <view class="nav_section_items">
+            <!--image-->
+            <view class="section_image" bindtap="navigateDetail" data-uid="{{item.userId}}">
+              <!-- <block wx:if="{{item.avatar}}">
                     <image src="{{item.avatar}}" mode="aspectFill"></image>
                 </block>
                 <block wx:else>
                     <image src="../../images/default_pic.png" mode="aspectFill"></image>
                 </block> -->
-                <image src="../../images/default_pic.png" mode="aspectFill"></image>
-                </view>
-                <!--content-->
-                <view class="section_cont" bindtap="navigateDetail" data-uid="{{item.userId}}">
-                    <view class="section_cont_sub">
-                        <text>{{item.userName}}</text>
-                    </view>
-                    <view class="section_cont_price">价格：{{item.price}}</view>
-                    <view>{{item.msg}}</view>
-                </view>
-                <!--book-->
-                <view class="section_book" bindtap="bookTap" data-uid="{{item.userId}}">
-                        <text>预约</text>
-                </view>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
             </view>
-            
+            <!--content-->
+            <view class="section_cont" bindtap="navigateDetail" data-uid="{{item.userId}}">
+              <view class="section_cont_sub">
+                <text>{{item.userName}}</text>
+              </view>
+              <view class="section_cont_price">价格：{{item.price}}</view>
+              <view>{{item.msg}}</view>
+            </view>
+            <!--book-->
+            <view class="section_book" bindtap="bookTap" data-uid="{{item.userId}}">
+              <text>预约</text>
+            </view>
+          </view>
+
         </block>
+      </view>
+
+      <view wx:else>暂无数据</view>
+
     </view>
-    
-    <view wx:else>暂无数据</view>
 
-</view>
-
-</scroll-view>
+  </scroll-view>
 </view>

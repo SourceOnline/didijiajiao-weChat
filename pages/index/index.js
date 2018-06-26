@@ -21,10 +21,19 @@ Page({
   },
   onShow: function () {
     var that = this
-    that.getCity();
-    that.findTeacher();
     //获取当前经纬度
     that.getLocation()
+    //获取当前城市
+    that.getCity();
+    //查询周边教师
+    that.findTeacher();
+    
+  },
+  //一键找老师
+  bindJustFindTeacher: function(){
+    wx.navigateTo({
+      url: '../book/book'
+    })
   },
   //设置城市
   getCity: function () {
@@ -40,17 +49,11 @@ Page({
         get_poi: 0 //是否返回周边POI列表：1.返回；0不返回(默认)
       },
       success: function (res) {
-        // console.log("获取城市")
-        // console.log(res)
+        console.log("获取城市")
+        console.log(res)
         that.setData({
           localCity: res.result.address_component.city
         })
-      },
-      fail: function (res) {
-        //console.log(res);
-      },
-      complete: function (res) {
-        //console.log(res);
       }
     });
   },
@@ -63,8 +66,8 @@ Page({
       type: 'gcj02',// 默认wgs84
       success: function (res) {
         // success
-        // console.log("获取经纬度")
-        // console.log(res)
+        console.log("获取经纬度")
+        console.log(res)
         that.setData({
           hasLocation: true,
           location: {
@@ -74,6 +77,8 @@ Page({
         })
         app.location.longitude = res.longitude
         app.location.latitude = res.latitude
+        // app.location.name = res.name
+        // app.location.address = res.address
         that.getCity();
       }
     })
@@ -93,6 +98,8 @@ Page({
         })
         app.location.longitude = res.longitude
         app.location.latitude = res.latitude
+        app.location.name = res.name
+        app.location.address = res.address
         that.getCity();
       },
       fail: function () {
@@ -154,9 +161,11 @@ Page({
         },
         method: "GET",
         success: function (res) {
-          that.setData({
-            teachers: res.data.data.teachers
-          })
+          if (null != res.data.data){
+            that.setData({
+              teachers: res.data.data.teachers
+            })
+          }
         }
       })
     }

@@ -1,59 +1,48 @@
 // pages/address/address.js
 //获取应用实例
 var app = getApp()
-// 引入SDK核心类
-var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
-var qqmapsdk;
+const { $Message } = require('../../dist/base/index');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    visible: false,
+    addressid:0
   },
-
-
-  bindAdd:function(){
+  //打开对话框
+  handleOpen(e) {
+    console.log(e)
     var that = this
-    that.chooseLocation()
+    console.log(e.currentTarget.dataset.addressid)
+    that.setData({
+      visible: true,
+      addressid: e.currentTarget.dataset.addressid
+    });
   },
-
-  test:function(e){
-    var id = e.currentTarget.dataset.aid;
-    console.log(id)
-  },
-
-  //地图选择位置
-  chooseLocation: function () {
-    console.log("地图选择位置")
+  //对话框取消
+  handleClose(e) {
+    console.log(e)
     var that = this
-    wx.chooseLocation({
-      success: function (res) {
-        // success
-        console.log(res)
-        that.setHome(res)
-      },
-      fail: function () {
-        // fail
-      },
-      complete: function () {
-        // complete
-      }
-    })
+    console.log(e.currentTarget.dataset.addressid)
+    that.setData({
+      visible: false
+    });
   },
-
-  //处理数据-上传家位置
-  setHome: function (location){
+  //对话框确定
+  handleSure(e) {
+    console.log(e)
+    var that = this
+    var addressid = e.currentTarget.dataset.addressid
     var HOST = app.globalData.URL_PATH;
     var token = app.globalData.token;
     var that = this;
     wx.request({
-      url: HOST + '/api/address/setHome',
+      url: HOST + '/api/address/delete',
       data: {
-        longitude: location.longitude,
-        latitude: location.latitude,
-        message: location.address,
-        token: token
+        token: token,
+        addressId: addressid
       },
       method: "GET",
       complete: function (res) {
@@ -61,7 +50,9 @@ Page({
         if (res == null || res.data == null) {
           reject(new Error('网络请求失败'))
         }
-        that.onLoad()
+        that.setData({
+          visible: false
+        });
       },
       success: function (res) {
         if (res.data.status == 1) {
@@ -70,14 +61,33 @@ Page({
             icon: 'success',
             duration: 2000
           })
+          setTimeout(function () {
+            that.onShow()
+          }, 2000)
         } else {
           wx.showToast({
             title: res.data.message,
-            icon: 'error',
+            icon: 'none',
             duration: 2000
           })
         }
       }
+    })
+
+    
+  },
+  //添加地址
+  bindAdd: function () {
+    wx.navigateTo({
+      url: '../addressAdd/addressAdd?addressid=0'
+    })
+  },
+
+  //修改地址
+  bindEdit: function (e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../addressAdd/addressAdd?addressid=' + e.currentTarget.dataset.addressid
     })
   },
 
@@ -93,6 +103,7 @@ Page({
       },
       method: "GET",
       complete: function (res) {
+        console.log("位置列表")
         console.log(res.data)
         if (res == null || res.data == null) {
           reject(new Error('网络请求失败'))
@@ -114,64 +125,19 @@ Page({
     })
   },
 
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    qqmapsdk = new QQMapWX({
-      key: app.QQMapWXKey // 必填
-    });
-    var that = this
-    that.getList()
-  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this
+    that.getList()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

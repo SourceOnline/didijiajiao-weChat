@@ -21,7 +21,7 @@
     <view class="i-cell i-input">
       <view class="i-cell-hd i-input-title">详细地址</view>
       <picker bindchange="bindAddrPickerChange" value="{{addrIndex}}" range="{{address}}">
-        <text>{{addressList[addrIndex].message}}</text>
+        <text>{{addressList[addrIndex].addressNameAndDoor}}</text>
       </picker>
     </view>
 
