@@ -50,11 +50,11 @@
 }
 
 .save_btn {
-  width: 600rpx;
   background: #d24a58;
   font-size: 32rpx;
   color: #fff;
   border-radius: 0rpx;
+  margin: 20rpx;
 }
 
 .street-num {

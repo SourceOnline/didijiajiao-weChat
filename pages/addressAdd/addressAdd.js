@@ -12,13 +12,13 @@ Page({
    */
   data: {
     addressid: 0,
-    address_component:null,
-    alocation:null,
-    data_name:null,
+    address_component: null,
+    alocation: null,
+    data_name: null,
     data_phone: null,
     data_addr_name: null,
     data_addr_detail: null,
-    data_door:null
+    data_door: null
   },
 
   submitForm: function(e) {
@@ -29,13 +29,13 @@ Page({
       data_phone: e.detail.value.data_phone,
       data_door: e.detail.value.data_door
     })
-    if (null == that.data.alocation){
+    if (null == that.data.alocation) {
       wx.showToast({
         title: "地址不为空",
         icon: 'none',
         duration: 2000
       })
-    }else{
+    } else {
       that.setHome(that.data.address_component, that.data.alocation)
     }
   },
@@ -48,7 +48,7 @@ Page({
         // success
         console.log(res)
         that.setData({
-          alocation:res,
+          alocation: res,
           data_addr_name: res.name,
           data_addr_detail: res.address,
         })
@@ -174,6 +174,14 @@ Page({
           that.data.alocation.latitude = res.data.data.address.latitude
           that.data.alocation.name = res.data.data.address.addressName
           that.data.alocation.address = res.data.data.address.addressDetail
+
+          that.data.address_component.city = res.data.data.address.city
+          that.data.address_component.district = res.data.data.address.district
+          that.data.address_component.nation = res.data.data.address.nation
+          that.data.address_component.province = res.data.data.address.province
+          that.data.address_component.street = res.data.data.address.street
+          that.data.address_component.street_number = res.data.data.address.streetNumber
+
         } else {
           wx.showToast({
             title: res.data.message,
@@ -198,16 +206,17 @@ Page({
       data_phone: app.globalData.user.mobile,
       data_addr_name: app.location.name,
       data_addr_detail: app.location.address,
-      alocation:app.location
+      alocation: app.location,
+      address_component: app.address_component
     })
     console.log(options.addressid)
-    if (0 != options.addressid){
+    if (0 != options.addressid) {
       console.log("查询地址详情")
       that.getAddressDetail(options.addressid)
       that.setData({
         addressid: options.addressid
       })
     }
-    
+
   }
 })

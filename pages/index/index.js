@@ -7,9 +7,10 @@ var qqmapsdk;
 
 Page({
   data: {
-    localCity: null,
+    localCity: "定位中...",
     //默认未获取地址
     hasLocation: false,
+    url_path:null
   },
   onLoad: function () {
     //检测用户登陆
@@ -18,6 +19,9 @@ Page({
         url: '../wxlogin/wxlogin'
       })
     }
+    this.setData({
+      url_path: app.globalData.URL_PATH
+    })
   },
   onShow: function () {
     var that = this

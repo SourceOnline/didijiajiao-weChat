@@ -14,7 +14,7 @@
 </view> -->
 
 <view class="header">
-  <view class="location ellipsis" bindtap="">
+  <view class="location ellipsis" bindtap="chooseLocation">
     <image class="icon" src="../../images/icon_location.png" /> {{localCity}}
   </view>
   <!-- <view class="search" bindtap="tapSearch">
@@ -37,13 +37,12 @@
           <view class="nav_section_items">
             <!--image-->
             <view class="section_image" bindtap="navigateDetail" data-uid="{{item.userId}}">
-              <!-- <block wx:if="{{item.avatar}}">
-                    <image src="{{item.avatar}}" mode="aspectFill"></image>
+               <block wx:if="{{item.avatar}}">
+                    <image src="{{url_path}}{{item.avatar}}" mode="aspectFill"></image>
                 </block>
                 <block wx:else>
                     <image src="../../images/default_pic.png" mode="aspectFill"></image>
-                </block> -->
-              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+                </block> 
             </view>
             <!--content-->
             <view class="section_cont" bindtap="navigateDetail" data-uid="{{item.userId}}">

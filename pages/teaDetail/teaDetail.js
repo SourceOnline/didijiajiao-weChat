@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    url_path:null
   },
 
   /**
@@ -18,6 +19,9 @@ Page({
     if (null != options.uid){
       that.teacherDetail(options.uid)
     }
+    that.setData({
+      url_path: app.globalData.URL_PATH
+    })
   },
 
   // book预约

@@ -51,5 +51,13 @@ App({
     latitude: 24.08383,
     name: '未知地点',
     address: '未知位置'
+  },
+  address_component:{
+    city: null,
+    district: null,
+    nation: null,
+    province: null,
+    street: null,
+    street_number: null
   }
 })

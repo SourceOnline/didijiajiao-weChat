@@ -5,13 +5,12 @@
 <view class="i-card">
   <view class="i-card-header">
     <view class="i-card-header-content">
-      <!-- <block wx:if="{{teacherDeatil.avatar}}">
-        <image class="i-card-header-thumb" src="{{teacherDeatil.avatar}}" mode="aspectFit"></image>
+       <block wx:if="{{teacherDeatil.avatar}}">
+        <image class="i-card-header-thumb" src="{{url_path}}{{teacherDeatil.avatar}}" mode="aspectFit"></image>
       </block>
       <block wx:else>
         <image class="i-card-header-thumb" mode="aspectFit" src="../../images/default_pic.png"></image>
-      </block> -->
-      <image class="i-card-header-thumb" mode="aspectFit" src="../../images/default_pic.png"></image>
+      </block> 
       {{teacherDeatil.userName}}
     </view>
     <view class="i-card-header-extra">职称</view>
