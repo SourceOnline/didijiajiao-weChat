@@ -1,148 +1,166 @@
 // index/list.js  
-//获取应用实例
-const app = getApp()
 
+var app = getApp();
 Page({
-  /** 
-   * 页面的初始数据 
-   */
   data: {
-    tabTxt: ['品牌', '价格', '销量'],//分类  
+    data: [], //数据
+    select_order: 0, //智能排序
+    select_grade: 0, //年级
+    select_subject: 0, //科目
+    tabTxt: ['智能排序', '年级', '科目'], //tab文案
     tab: [true, true, true],
-    pinpaiList: [{ 'id': '1', 'title': '品牌1' }, { 'id': '1', 'title': '品牌1' }],
-    pinpai_id: 0,//品牌  
-    pinpai_txt: '',
-    jiage_id: 0,//价格  
-    jiage_txt: '',
-    xiaoliang_id: 0,//销量  
-    xiaoliang_txt: '',
-    path: app.globalData.URL_PATH,
-    dataList: [
-      {
-        goods_id: 1,
-        goods_title: '商品标题1',
-        goods_img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        goods_xiaoliang: '0',
-        goods_price: '60'
-      }, {
-        goods_id: 1,
-        goods_title: '商品标题2',
-        goods_img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        goods_xiaoliang: '0',
-        goods_price: '70'
-      }, {
-        goods_id: 1,
-        goods_title: '商品标题3',
-        goods_img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        goods_xiaoliang: '0',
-        goods_price: '80'
-      }, {
-        goods_id: 1,
-        goods_title: '商品标题4',
-        goods_img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        goods_xiaoliang: '0',
-        goods_price: '90'
-      }, {
-        goods_id: 1,
-        goods_title: '商品标题5',
-        goods_img: 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        goods_xiaoliang: '0',
-        goods_price: '110'
-      }
-    ],
+    disabled: false, //加载更多按钮状态
+    page: 1, //当前页码
+    hasMore: false, //加载更多按钮
+    moreTxt: '点击加载更多',
+    dataNull: true
   },
-
-  // 选项卡  
+  onReady: function () {
+    //初始化数据
+    var self = this;
+    self.getFilter();
+  },
+  stuDetailTap:function(e){
+    wx.navigateTo({
+      url: '../stuDetail/stuDetail?oid='+e.currentTarget.dataset.oid
+    })
+  },
+  // 选项卡
   filterTab: function (e) {
-    var data = [true, true, true], index = e.currentTarget.dataset.index;
+    console.log("选项卡")
+    console.log(e)
+    var data = [true, true, true],
+      index = e.currentTarget.dataset.index;
     data[index] = !this.data.tab[index];
     this.setData({
       tab: data
     })
   },
-
-  //筛选项点击操作  
+  // 获取筛选项
+  getFilter: function () {
+    var self = this;
+    wx.request({
+      url: app.api.BASE_PATH + app.api.order.findStuSelect,
+      data: {
+        token: app.globalData.token
+      },
+      method: "GET",
+      success: function (res) {
+        console.log(res)
+        self.getData();
+        self.setData({
+          filterList: res.data.data.select
+        });
+      },
+      fail: function () {
+        console.log('error!!!!!!!!!!!!!!')
+      }
+    })
+  },
+  //筛选项点击操作
   filter: function (e) {
-    var self = this, id = e.currentTarget.dataset.id, txt = e.currentTarget.dataset.txt, tabTxt = this.data.tabTxt;
+    var self = this,
+      id = e.currentTarget.dataset.id,
+      txt = e.currentTarget.dataset.txt,
+      tabTxt = this.data.tabTxt;
     switch (e.currentTarget.dataset.index) {
       case '0':
         tabTxt[0] = txt;
         self.setData({
+          page: 1,
+          data: [],
           tab: [true, true, true],
           tabTxt: tabTxt,
-          pinpai_id: id,
-          pinpai_txt: txt
+          select_order: id
         });
         break;
       case '1':
         tabTxt[1] = txt;
         self.setData({
+          page: 1,
+          data: [],
           tab: [true, true, true],
           tabTxt: tabTxt,
-          jiage_id: id,
-          jiage_txt: txt
+          select_grade: id
         });
         break;
       case '2':
         tabTxt[2] = txt;
         self.setData({
+          page: 1,
+          data: [],
           tab: [true, true, true],
           tabTxt: tabTxt,
-          xiaoliang_id: id,
-          xiaoliang_txt: txt
+          select_subject: id
         });
         break;
     }
-    //数据筛选  
-    self.getDataList();
+    //数据筛选
+    self.getData();
   },
 
-  //加载数据  
-  getDataList: function () {
-    //调用数据接口，获取数据  
-
-  },
-
-  //查询周边教师
-  findTeacher() {
-
+  //加载数据
+  getData: function (callback) {
+    var self = this;
+    wx.showToast({
+      title: '加载中...',
+      icon: 'loading',
+      duration: 10000
+    });
     wx.request({
-      url: host + '/api/v6/user/login',
+      url: app.api.BASE_PATH + app.api.order.findStudent,
       data: {
-        uname: this.data.phone,
-        passpwd: password
+        token: app.globalData.token,
+        page: self.data.page,
+        order: self.data.select_order,
+        grade: self.data.select_grade,
+        subjectId: self.data.select_subject
       },
-      method: "POST",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"  //post
-      },
-      complete: function (res) {
-        console.log(res.data)
-        if (res == null || res.data == null) {
-          reject(new Error('网络请求失败'))
-        }
-      },
+      method: "GET",
       success: function (res) {
-        if (res.data.status == 1) {
-          app.globalData.sysUser = res.data.data;
-          wx.showToast({
-            title: '欢迎您：' + res.data.data.nickname,
-            icon: 'success',
-            duration: 2000
-          })
-          wx.navigateTo({
-            url: '../main/main',
-            duration: 1000
-          })
-        } else {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'error',
-            duration: 2000
-          })
-        }
+        console.log("加载数据")
+        console.log(res)
+        self.dataFormat(res);
+      },
+      fail: function () {
+        console.log('error!!!!!!!!!!!!!!')
       }
     })
-  }
+  },
+  //数据处理
+  dataFormat: function (d) {
+    if (d.data.status == 1) {
+      if (d.data.data&&d.data.data.length>0) {
+        console.log('has data')
+        var datas = this.data.data.concat(d.data.data),
+          flag = d.data.data.length < 10;
+        this.setData({
+          url_path: app.api.BASE_PATH,
+          orders: datas,
+          disabled: flag ? true : false,
+          moreTxt: flag ? "已加载全部数据" : "点击加载更多",
+          hasMore: true,
+          dataNull: true
+        });
 
-})  
+      } else {
+        this.setData({
+          orders: null,
+          hasMore: false,
+          dataNull: false
+        });
+      }
+    } else {
+      console.log('接口异常！')
+    }
+    wx.hideToast();
+  },
+  //加载更多
+  getMore: function () {
+    var self = this;
+    self.data.page++;
+    self.getData(function (d) {
+      self.dataFormat(d)
+    });
+  },
+});

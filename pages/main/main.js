@@ -12,7 +12,7 @@ Page({
   //事件:转跳找老师
   bindFindTeacher: function () {
     wx.navigateTo({
-      url: '../teachers/teachers'
+      url: '../select/select'
     })
   },
 

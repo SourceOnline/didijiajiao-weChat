@@ -1,13 +1,12 @@
 {
-  "debug":true,
-  "pages":[
-    
+  "debug": true,
+  "pages": [
     "pages/index/index",
     "pages/main/main",
-    "pages/logs/logs",
-   "pages/wxlogin/wxlogin",
+    "pages/wxlogin/wxlogin",
     "pages/login/login",
     "pages/students/students",
+    "pages/stuDetail/stuDetail",
     "pages/teachers/teachers",
     "pages/teaDetail/teaDetail",
     "pages/book/book",
@@ -16,7 +15,7 @@
     "pages/order/order",
     "pages/address/address",
     "pages/addressAdd/addressAdd",
-    "pages/publish/publish"
+    "pages/task/task"
   ],
   "window": {
     "navigationBarBackgroundColor": "#37383c",
@@ -25,31 +24,29 @@
     "backgroundTextStyle": "dark",
     "backgroundColor": "#f9f9f9"
   },
- "tabBar": {
-  "color": "#a9b7b7",
-  "selectedColor": "#11cd6e",
-  "borderStyle": "white",
-  "list": [
-    {
-      "selectedIconPath": "images/index_icon.png",
-      "iconPath": "images/index_icon.png",
-      "pagePath": "pages/index/index",
-      "text": "找老师"
-    },
-    {
-      "selectedIconPath": "images/index_icon.png",
-      "iconPath": "images/index_icon.png",
-      "pagePath": "pages/main/main",
-      "text": "找学生"
-    }
-    ,
-    {
-      "selectedIconPath": "images/index_icon.png",
-      "iconPath": "images/index_icon.png",
-      "pagePath": "pages/mine/mine",
-      "text": "我的"
-    }
-  ]
-}
-
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "images/index_icon.png",
+        "iconPath": "images/index_icon.png",
+        "pagePath": "pages/index/index",
+        "text": "找老师"
+      },
+      {
+        "selectedIconPath": "images/index_icon.png",
+        "iconPath": "images/index_icon.png",
+        "pagePath": "pages/students/students",
+        "text": "找学生"
+      },
+      {
+        "selectedIconPath": "images/index_icon.png",
+        "iconPath": "images/index_icon.png",
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  }
 }

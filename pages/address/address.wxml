@@ -7,11 +7,13 @@
 <view wx:if="{{addressList}}">
   <block wx:for="{{addressList}}" wx:key="item.addressId">
     <view class="i-cell i-cell-last">
-      <view class="i-cell-bd" bindtap="handleOpen" data-addressid="{{item.addressId}}">
-        <view class="i-cell-text" >{{item.addressNameAndDoor}}</view>
-        <!-- <view class="i-cell-text" >{{item.message}}</view> -->
+      <view class="i-cell-bd" bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindlongtap="bingLongTap" bindtap="handleOpen" data-addressid="{{item.addressId}}">
+        <view class="i-cell-text" >{{item.addressNameAndDoor}}</view>        
         <view class="i-cell-desc">{{item.nameAndhone}}</view>
       </view>
+
+      <view wx:if="{{item.ifDefault==true}}" class="zan-tag zan-tag--primary">默认</view>
+
       <view class="i-icon i-icon-editor" style="font-size: 28px; color:#80848f" bindtap="bindEdit" data-addressid="{{item.addressId}}"></view>
     </view>
   </block>

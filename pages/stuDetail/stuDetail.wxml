@@ -1,0 +1,13 @@
+<!--pages/stuDetail/stuDetail.wxml-->
+<view class="list">
+    <view bindtap="jumpTo" data-opt="list0">list0</view>
+    <view bindtap="jumpTo" data-opt="list11">list11</view>
+    <view bindtap="jumpTo" data-opt="list29">list29</view>
+</view>
+
+
+<scroll-view  scroll-into-view="{{toView}}"  scroll-y="true"   scroll-with-animation="true"   class="scr">
+    <view wx:for="{{list}}"  id="{{item}}"  class="test">
+      {{item}}
+    </view>
+</scroll-view>

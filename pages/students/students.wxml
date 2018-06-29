@@ -1,40 +1,70 @@
-<view class="tabTit box">  
-  <view class="flex1{{!tab[index]?' active':''}}" wx:for="{{tabTxt}}" wx:key="type" data-index="{{index}}" bindtap="filterTab">  
-    <text>{{item}}</text>  
-    <image src="/img/arrow.png"></image>  
-  </view>  
-</view>  
-<!--筛选项-->  
-<view class="tabLayer" hidden="{{tab[0]}}">  
-    <text class="{{pinpai_id==0?'active':''}}" data-id="0" data-index="0" data-txt="品牌" bindtap="filter">不限</text>  
-    <text class="{{pinpai_id==item.id?'active':''}}" wx:for="{{pinpaiList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="0" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>  
-</view>  
-<view class="tabLayer" hidden="{{tab[1]}}">  
-    <text class="{{jiage_id==0?'active':''}}" data-id="0" data-index="1" data-txt="价格" bindtap="filter">不限</text>  
-    <text class="{{jiage_id==1?'active':''}}" data-id="1" data-index="1" data-txt="58-88" bindtap="filter">58-88</text>  
-    <text class="{{jiage_id==2?'active':''}}" data-id="2" data-index="1" data-txt="88-108" bindtap="filter">88-108</text>  
-    <text class="{{jiage_id==3?'active':''}}" data-id="3" data-index="1" data-txt="108-188" bindtap="filter">108-188</text>  
-</view>  
-<view class="tabLayer" hidden="{{tab[2]}}">  
-    <text class="{{xiaoliang_id==0?'active':''}}" data-id="0" data-index="2" data-txt="销量" bindtap="filter">不限</text>  
-    <text class="{{xiaoliang_id==1?'active':''}}" data-id="1" data-index="2" data-txt="从高到低" bindtap="filter">从高到低</text>  
-    <text class="{{xiaoliang_id==2?'active':''}}" data-id="2" data-index="2" data-txt="从低到高" bindtap="filter">从低到高</text>  
-</view>  
-  
-<view class='list'>  
-  <block wx:for='{{dataList}}' wx:key='list' wx:for-item="item">  
-  <view class="list_item">  
-      <navigator url='details?id={{item.goods_id}}'>  
-      <view class='img'>  
-        <image src="{{imghref}}{{item.goods_img}}"  mode="scaleToFill"/>  
-      </view>  
-      <view class='info'>  
-        <view class='title'>{{item.goods_title}}</view>  
-        <view class='price'>￥{{item.goods_price}}</view>  
-        <view class='num'>销量{{item.goods_xiaoliang}}</view>  
-      </view>  
-       </navigator>  
-      <view class='clear'></view>  
-  </view>  
-  </block>  
-</view>  
+<!--pages/select/select.wxml-->
+<!--选项卡-->
+<view class="tabTit box tc bg_f">
+  <view class="flex1{{!tab[index]?' active':''}}" wx:for="{{tabTxt}}" wx:key="" data-index="{{index}}" bindtap="filterTab">
+    <text>{{item}}</text>
+    <image src="/images/arrow.png"></image>
+  </view>
+</view>
+<!--筛选项-->
+<view class="tabLayer tc" hidden="{{tab[0]}}">
+  <text class="{{select_order==0?'active':''}}" data-id="0" data-index="0" data-txt="智能排序" bindtap="filter">不限</text>
+  <text class="{{select_order==item.id?'active':''}}" wx:for="{{filterList.order_list}}" wx:key="" data-id="{{item.id}}" data-index="0" data-txt="{{item.name}}" bindtap="filter">{{item.name}}</text>
+</view>
+<view class="tabLayer tc" hidden="{{tab[1]}}">
+  <text class="{{select_grade==0?'active':''}}" data-id="0" data-index="1" data-txt="年级" bindtap="filter">不限</text>
+  <text class="{{select_grade==item.id?'active':''}}" wx:for="{{filterList.grade_list}}" wx:key="" data-id="{{item.id}}" data-index="1" data-txt="{{item.name}}" bindtap="filter">{{item.name}}</text>
+</view>
+<view class="tabLayer tc" hidden="{{tab[2]}}">
+  <text class="{{select_subject==0?'active':''}}" data-id="0" data-index="2" data-txt="科目" bindtap="filter">不限</text>
+  <text class="{{select_subject==item.id?'active':''}}" wx:for="{{filterList.subject_list}}" wx:key="" data-id="{{item.id}}" data-index="2" data-txt="{{item.name}}" bindtap="filter">{{item.name}}</text>
+</view>
+
+<view class=" ">
+  <!--结果-->
+  <scroll-view scroll-y="true" class="page-body" bindscrolltolower="loadMore">
+    <!--list-->
+    <view class="nav_section">
+      <view wx:if="{{orders}}">
+        <block wx:for="{{orders}}" wx:key="item.userId">
+          <view class="nav_section_items">
+            <!--image-->
+            <view class="section_image" bindtap="navigateDetail" data-uid="{{item.userId}}">
+               <block wx:if="{{item.avatar}}">
+                    <image src="{{url_path}}{{item.avatar}}" mode="aspectFill"></image>
+                </block>
+                <block wx:else>
+                    <image src="../../images/default_pic.png" mode="aspectFill"></image>
+                </block> 
+            </view>
+            <!--content-->
+            <view class="section_cont" bindtap="navigateDetail" data-uid="{{item.userId}}">
+              <view class="section_cont_sub">
+                <text>科目：{{item.subject}}</text>
+              </view>
+              <view class="section_cont_price">价格：{{item.price}}</view>
+              <view>{{item.learnTime}}66666666666666666666666666666</view>
+            </view>
+            <!--book-->
+              <view class="section_book" bindtap="stuDetailTap" data-oid="{{item.orderId}}">
+              <text>查看</text>
+            </view>  
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!--加载更多按钮-->
+  <view wx:if="{{hasMore}}">
+    <button type="warn" plain="true" disabled="{{disabled}}" bindtap="getMore" class="mt20">{{moreTxt}}</button>
+  </view>
+
+  <!--无数据提示-->
+  <view class="null tc" hidden="{{dataNull}}">
+    <icon type="clear" size="100" color="#ccc" />
+    <view class="txt1">当前筛选无结果</view>
+    <view class="txt2">您可以尝试筛选其他分类看看</view>
+  </view>
+
+</view>

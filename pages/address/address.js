@@ -1,7 +1,9 @@
 // pages/address/address.js
 //获取应用实例
 var app = getApp()
-const { $Message } = require('../../dist/base/index');
+const {
+  $Message
+} = require('../../dist/base/index');
 Page({
 
   /**
@@ -9,10 +11,18 @@ Page({
    */
   data: {
     visible: false,
-    addressid:0
+    addressid: 0,
+    startTime: 0,
+    endTime: 0
   },
-  //打开对话框
-  handleOpen(e) {
+  bindTouchStart: function (e) {
+    this.startTime = e.timeStamp;
+  },
+  bindTouchEnd: function (e) {
+    this.endTime = e.timeStamp;
+  },
+  //长按事件-删除-打开对话框
+  bingLongTap: function (e) {
     console.log(e)
     var that = this
     console.log(e.currentTarget.dataset.addressid)
@@ -20,6 +30,13 @@ Page({
       visible: true,
       addressid: e.currentTarget.dataset.addressid
     });
+
+  },
+  //点击事件，
+  handleOpen(e) {
+    if (this.endTime - this.startTime < 350) {
+      console.log("点击" + e.currentTarget.dataset.addressid);
+    }
   },
   //对话框取消
   handleClose(e) {
@@ -74,7 +91,7 @@ Page({
       }
     })
 
-    
+
   },
   //添加地址
   bindAdd: function () {

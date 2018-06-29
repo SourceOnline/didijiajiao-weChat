@@ -44,7 +44,6 @@ App({
     token: 'fc6e0ed6-bb4d-41e4-9617-eb5c3fdbd4bf' //abc
     //585e130a-dd15-434b-b612-e85427160822   //cc
   },
-
   QQMapWXKey: 'A75BZ-VXF6W-V7CRU-OP2CO-XZMZF-4GFEX',
   location: {
     longitude: 115.38273,
@@ -59,5 +58,19 @@ App({
     province: null,
     street: null,
     street_number: null
+  },
+  //api接口
+  api:{
+    BASE_PATH: 'http://localhost:8012',//服务器基本路径
+    login:'/api/login',//登陆
+    order:{
+      findTeacher: '/api/order/findTeacher',//查询周边教员
+      askForTeach: '/api/order/askForTeach',//发布家教任务
+      orderDetail: '/api/order/orderDetail',//家教任务详情
+      findStudent: '/api/order/findStudent',//查询附近家教资源
+      acceptTask: '/api/order/acceptTask',//接取家教任务
+      finishOrder: '/api/order/finishOrder',//完成订单
+      findStuSelect: '/api/order/findStuSelect', //查询学生选择器
+    }
   }
 })

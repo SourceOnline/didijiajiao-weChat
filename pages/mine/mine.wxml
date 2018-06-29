@@ -22,11 +22,11 @@
         <view class="i-grid-label">地址</view>
       </view>
 
-      <view class="i-grid-item" style="width: 33.33%">
+      <view class="i-grid-item" style="width: 33.33%" bindtap="bindTask">
         <view class="i-grid-icon">
           <image src="../../images/index_icon.png" />
         </view>
-        <view class="i-grid-label">宫格</view>
+        <view class="i-grid-label">任务</view>
       </view>
     </view>
 

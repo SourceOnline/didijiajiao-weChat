@@ -14,15 +14,17 @@
       <view class="street-num" bindtap="chooseLocation">
         {{data_addr_name}}
         <text decode="{{true}}">&nbsp;&nbsp;</text> 
-        <!-- {{data_addr_detail}} -->
       </view>
-      <!-- <input type="text" name="data_door" value="{{data_addr_name}}{{data_addr_detail}}" /> -->
     </view>
 
     <view class="form_group">
       <text></text>
       <input type="text" placeholder="门号,如：A栋302" placeholder-class="placeholder_style" name="data_door" value="{{data_door}}" />
     </view>
+
+    <i-radio value="是否设为默认地址" disabled="{{disabled}}" checked="{{checked}}" bindchange="handleDefChange">
+    </i-radio>
+
     <button class="save_btn" formType="submit">保存</button>
   </form>
 </view>

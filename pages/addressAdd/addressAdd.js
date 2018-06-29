@@ -18,9 +18,15 @@ Page({
     data_phone: null,
     data_addr_name: null,
     data_addr_detail: null,
-    data_door: null
+    data_door: null,
+    checked: false,
+    disabled: false,
   },
-
+  handleDefChange({ detail = {} }) {
+    this.setData({
+      checked: detail.current
+    });
+  },
   submitForm: function(e) {
     console.log('保存....')
     var that = this
@@ -70,6 +76,10 @@ Page({
     var HOST = app.globalData.URL_PATH;
     var token = app.globalData.token;
     var that = this;
+    var isDefault =0 ;
+    if (that.data.checked){
+      isDefault =1;
+    }
     wx.request({
       url: HOST + '/api/address/setHome',
       data: {
@@ -87,6 +97,7 @@ Page({
         streetNumber: address_component.street_number,
         addressName: location.name,
         addressDetail: location.address,
+        def: isDefault,
         token: token
       },
       method: "GET",
@@ -168,7 +179,8 @@ Page({
             data_phone: res.data.data.address.phone,
             data_addr_name: res.data.data.address.addressName,
             data_addr_detail: res.data.data.address.addressDetail,
-            data_door: res.data.data.address.door
+            data_door: res.data.data.address.door,
+            checked: res.data.data.address.default
           })
           that.data.alocation.longitude = res.data.data.address.longitude
           that.data.alocation.latitude = res.data.data.address.latitude
