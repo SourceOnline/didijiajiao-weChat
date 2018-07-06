@@ -46,3 +46,16 @@
   学生评价 教学特点 毕业院校 教学经历 教过学生 成功案例 教学心得 收藏、咨询
   学校
 </view> -->
+
+<!-- <view class="list">
+    <view bindtap="jumpTo" data-opt="list0">list0</view>
+    <view bindtap="jumpTo" data-opt="list11">list11</view>
+    <view bindtap="jumpTo" data-opt="list29">list29</view>
+</view>
+
+
+<scroll-view  scroll-into-view="{{toView}}"  scroll-y="true"   scroll-with-animation="true"   class="scr">
+    <view wx:for="{{list}}"  id="{{item}}"  class="test">
+      {{item}}
+    </view>
+</scroll-view> -->

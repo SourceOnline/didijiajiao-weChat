@@ -9,7 +9,50 @@ Page({
    */
   data: {
     userInfo: {},
-    hasUserInfo: false
+    hasUserInfo: false,
+    tempFilePaths: []
+  },
+
+  upimg: function () {
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都
+      success: function (res) {
+        var data = {
+          program_id: app.jtappid,
+          token: app.globalData.token
+        }
+        var tempFilePaths = res.tempFilePaths  //图片
+        wx.uploadFile({
+          url: app.api.BASE_PATH + app.api.user.uploadImg, //
+          header: {
+            "Content-Type": "multipart/form-data"
+          },  
+          filePath: tempFilePaths[0],
+          name: 'file', //文件对应的参数名字(key)
+          formData: data,  //其它的表单信息
+          success: function (res) {
+            console.log(res)
+            var data = res.data
+            console.log(data)
+            if (res.statusCode == 200 && res.errMsg == "uploadFile:ok"){
+              wx.showToast({
+                title: '上传成功！',
+                icon: 'success',
+                duration: 2000
+              })
+            }else{
+              wx.showToast({
+                title: '上传失败！',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          }
+        })
+      }
+    })
   },
 
   //事件转跳用户详情
@@ -34,6 +77,25 @@ Page({
   bindTask: function () {
     wx.navigateTo({
       url: '../task/task',
+    })
+  },
+  //事件test
+  bindTest: function () {
+    wx.navigateTo({
+      url: '../atest/atest',
+    })
+  },
+  //事件login
+  bindLogin: function () {
+    wx.navigateTo({
+      url: '../login/login',
+    })
+  },
+
+  //事件login
+  bindUserMsg: function () {
+    wx.navigateTo({
+      url: '../userMsg/userMsg',
     })
   },
     /**

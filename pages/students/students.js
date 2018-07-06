@@ -1,5 +1,4 @@
 // index/list.js  
-
 var app = getApp();
 Page({
   data: {
@@ -13,20 +12,47 @@ Page({
     page: 1, //当前页码
     hasMore: false, //加载更多按钮
     moreTxt: '点击加载更多',
-    dataNull: true
+    dataNull: true,
+
   },
-  onReady: function () {
+  onReady: function() {
+
     //初始化数据
     var self = this;
     self.getFilter();
+
   },
-  stuDetailTap:function(e){
+  // 下拉刷新
+  onPullDownRefresh: function() {
+    // 显示顶部刷新图标
+    wx.showNavigationBarLoading();
+    var that = this;
+    //初始化
+    that.setData({
+      page: 1,
+      data: []
+    });
+    that.getData();
+    setTimeout(function () {
+      // 隐藏导航栏加载框
+      wx.hideNavigationBarLoading();
+      // 停止下拉动作
+      wx.stopPullDownRefresh();
+    }, 1500);
+  },
+  //查看详情
+  stuDetailTap: function(e) {
     wx.navigateTo({
-      url: '../stuDetail/stuDetail?oid='+e.currentTarget.dataset.oid
+      url: '../stuDetail/stuDetail?oid=' + e.currentTarget.dataset.oid
     })
   },
+  //转跳详情
+  navigateDetail: function(e) {
+    console.log(e)
+    console.log(e.currentTarget.dataset.oid)
+  },
   // 选项卡
-  filterTab: function (e) {
+  filterTab: function(e) {
     console.log("选项卡")
     console.log(e)
     var data = [true, true, true],
@@ -37,7 +63,7 @@ Page({
     })
   },
   // 获取筛选项
-  getFilter: function () {
+  getFilter: function() {
     var self = this;
     wx.request({
       url: app.api.BASE_PATH + app.api.order.findStuSelect,
@@ -45,20 +71,20 @@ Page({
         token: app.globalData.token
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         self.getData();
         self.setData({
           filterList: res.data.data.select
         });
       },
-      fail: function () {
+      fail: function() {
         console.log('error!!!!!!!!!!!!!!')
       }
     })
   },
   //筛选项点击操作
-  filter: function (e) {
+  filter: function(e) {
     var self = this,
       id = e.currentTarget.dataset.id,
       txt = e.currentTarget.dataset.txt,
@@ -100,7 +126,7 @@ Page({
   },
 
   //加载数据
-  getData: function (callback) {
+  getData: function(callback) {
     var self = this;
     wx.showToast({
       title: '加载中...',
@@ -117,26 +143,29 @@ Page({
         subjectId: self.data.select_subject
       },
       method: "GET",
-      success: function (res) {
+      success: function(res) {
         console.log("加载数据")
         console.log(res)
         self.dataFormat(res);
       },
-      fail: function () {
+      fail: function() {
         console.log('error!!!!!!!!!!!!!!')
       }
     })
   },
   //数据处理
-  dataFormat: function (d) {
+  dataFormat: function(d) {
     if (d.data.status == 1) {
-      if (d.data.data&&d.data.data.length>0) {
+      if (d.data.data.rows && d.data.data.rows.length > 0) {
         console.log('has data')
-        var datas = this.data.data.concat(d.data.data),
-          flag = d.data.data.length < 10;
+        var datas = this.data.data.concat(d.data.data.rows),
+          flag = d.data.data.rows.length < 10;
+        if (datas.length == d.data.data.total){
+          flag = true
+        }
         this.setData({
           url_path: app.api.BASE_PATH,
-          orders: datas,
+          data: datas,
           disabled: flag ? true : false,
           moreTxt: flag ? "已加载全部数据" : "点击加载更多",
           hasMore: true,
@@ -156,10 +185,10 @@ Page({
     wx.hideToast();
   },
   //加载更多
-  getMore: function () {
+  getMore: function() {
     var self = this;
     self.data.page++;
-    self.getData(function (d) {
+    self.getData(function(d) {
       self.dataFormat(d)
     });
   },

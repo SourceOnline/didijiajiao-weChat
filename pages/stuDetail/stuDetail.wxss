@@ -1,9 +1,49 @@
 /* pages/stuDetail/stuDetail.wxss */
-.scr{
-    position: relative;
-    height: 500rpx
+
+.i-cell {
+  position: relative;
+  padding: 12px 15px;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  line-height: 1.4;
+  font-size: 14px;
+  overflow: hidden;
 }
-.test{
-    height: 80rpx;
+
+.i-cell::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 0 solid #e9eaec;
+  border-bottom-width: 1px;
+  left: 15px;
+  right: 0;
 }
-.list{ position: fixed; z-index: 9; top:30rpx; right: 10rpx; }
+.i-cell-bd {
+
+}
+.i-cell-text-hd {
+  line-height: 24px;
+  font-size: 14px;
+  font-weight:500;
+  min-width:40px;
+}
+
+.i-cell-ct {
+  line-height: 24px;
+  font-size: 14px;
+  margin-left:5px;
+
+}
+
+.btn-save{
+  margin: 5px;
+}

@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
-	"appid": "wx350739bf81dddd4a",
+	"appid": "wxba8fd6e97ad7624d",
 	"projectname": "didijiajiao",
 	"isGameTourist": false,
 	"condition": {
@@ -24,13 +24,24 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "ss",
+					"pathName": "pages/atest/atest",
+					"query": ""
+				}
+			]
 		}
 	}
 }

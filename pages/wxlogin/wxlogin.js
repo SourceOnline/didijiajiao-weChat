@@ -52,12 +52,10 @@ Page({
   },
   //获取app用户信息并登陆转跳首页
   getDiDiUserInfo: function () {
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
     wx.request({
-      url: HOST + '/api/user/getUser',
+      url: app.api.BASE_PATH + app.api.user.getUser,
       data: {
-        token: token
+        token: app.globalData.token
       },
       method: "GET",
       complete: function (res) {
@@ -67,19 +65,19 @@ Page({
       },
       success: function (res) {
         if (res.data.status == 1) {
-          app.globalData.user = res.data.data.user
+          app.user = res.data.data.user
           console.log("获取用户信息app")
-          console.log(app.globalData.user)
+          console.log(app.user)
 
           wx.showToast({
             title: '欢迎您：' + res.data.data.user.name,
             icon: 'success',
-            duration: 2000
+            duration: 1000
           })
-          wx.navigateBack()
-          // wx.redirectTo({
-          //   url: '../index/index'
-          // })
+
+          setTimeout(function () {
+            wx.navigateBack()
+          }, 1000)
         }
       }
     })

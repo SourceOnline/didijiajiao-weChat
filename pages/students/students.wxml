@@ -25,11 +25,11 @@
   <scroll-view scroll-y="true" class="page-body" bindscrolltolower="loadMore">
     <!--list-->
     <view class="nav_section">
-      <view wx:if="{{orders}}">
-        <block wx:for="{{orders}}" wx:key="item.userId">
+      <view wx:if="{{data}}">
+        <block wx:for="{{data}}" wx:key="item.orderId">
           <view class="nav_section_items">
             <!--image-->
-            <view class="section_image" bindtap="navigateDetail" data-uid="{{item.userId}}">
+            <view class="section_image" bindtap="navigateDetail" data-oid="{{item.orderId}}">
                <block wx:if="{{item.avatar}}">
                     <image src="{{url_path}}{{item.avatar}}" mode="aspectFill"></image>
                 </block>
@@ -38,12 +38,13 @@
                 </block> 
             </view>
             <!--content-->
-            <view class="section_cont" bindtap="navigateDetail" data-uid="{{item.userId}}">
+            <view class="section_cont" bindtap="navigateDetail" data-oid="{{item.orderId}}">
               <view class="section_cont_sub">
-                <text>科目：{{item.subject}}</text>
+                <text>科目：{{item.subjectName}}</text>
               </view>
               <view class="section_cont_price">价格：{{item.price}}</view>
-              <view>{{item.learnTime}}66666666666666666666666666666</view>
+              <view>{{item.address}}</view>
+              <view>{{item.learnTime}}</view>
             </view>
             <!--book-->
               <view class="section_book" bindtap="stuDetailTap" data-oid="{{item.orderId}}">

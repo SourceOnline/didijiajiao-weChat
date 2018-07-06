@@ -1,2 +1,63 @@
 <!--pages/task/task.wxml-->
-<text>pages/task/task.wxml</text>
+<!-- 标签栏 -->
+<i-tabs current="{{ current }}" bindchange="handleChange">
+  <i-tab key="5" title="预约" dot></i-tab>
+  <i-tab key="1" title="已接单"></i-tab>
+  <i-tab key="2" title="已完成"></i-tab>
+  <!-- <i-tab key="3" title="已取消" dot></i-tab>
+  <i-tab key="0" title="待处理" count="3"></i-tab> -->
+</i-tabs>
+
+<view class=" ">
+  <!--结果-->
+  <scroll-view scroll-y="true" class="page-body" bindscrolltolower="loadMore">
+    <!--list-->
+    <view class="nav_section">
+      <view wx:if="{{data}}">
+        <block wx:for="{{data}}" wx:key="item.orderId">
+          <view class="nav_section_items">
+            <!--image-->
+            <view class="section_image">
+              <block wx:if="{{item.avatar}}">
+                <image src="{{url_path}}{{item.avatar}}" mode="aspectFill"></image>
+              </block>
+              <block wx:else>
+                <image src="../../images/default_pic.png" mode="aspectFill"></image>
+              </block>
+            </view>
+            <!--content-->
+            <view class="section_cont" bindtap="bingShortTap" bindlongtap="bingLongTap" data-oid="{{item.orderId}}" bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd">
+              <view class="section_cont_sub">
+                <text>科目：{{item.subject}}</text>
+              </view>
+              <view class="section_cont_price">价格：{{item.price}}</view>
+              <view>{{item.address}}</view>
+              <view>{{item.learnTime}}</view>
+            </view>
+            <!--book-->
+            <!-- <view class="section_book" bindtap="stuDetailTap" data-oid="{{item.orderId}}">
+              <text>查看</text>
+            </view> -->
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!--加载更多按钮-->
+  <view wx:if="{{hasMore}}">
+    <button type="warn" plain="true" disabled="{{disabled}}" bindtap="getMore" class="mt20">{{moreTxt}}</button>
+  </view>
+
+  <!--无数据提示-->
+  <view class="null tc" hidden="{{dataNull}}">
+    <icon type="clear" size="100" color="#ccc" />
+    <view class="txt1">当前筛选无结果</view>
+    <!-- <view class="txt2">您可以尝试筛选其他分类看看</view> -->
+  </view>
+
+</view>
+
+<!-- 长按弹窗 -->
+<i-modal title="操作" visible="{{ visibleSelect }}" actions="{{ actionsSelect }}" action-mode="{{ vertical }}" bind:click="handleClickSelect">
+</i-modal>

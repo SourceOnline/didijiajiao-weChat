@@ -169,8 +169,8 @@ Page({
     var that = this
     that.getAddressList()
     that.setData({
-      userName: app.globalData.user.name,
-      phone: app.globalData.user.mobile,
+      userName: app.user.name,
+      phone: app.user.phone,
     })
     if (typeof (options.uid) != "undefined")  {
       that.setData({

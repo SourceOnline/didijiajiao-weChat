@@ -15,7 +15,9 @@
     "pages/order/order",
     "pages/address/address",
     "pages/addressAdd/addressAdd",
-    "pages/task/task"
+    "pages/task/task",
+    "pages/atest/atest",
+    "pages/userMsg/userMsg"
   ],
   "window": {
     "navigationBarBackgroundColor": "#37383c",

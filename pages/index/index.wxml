@@ -26,8 +26,9 @@
 
 <image class="bg-img-top" src="../../images/background-top-1.jpg"/>
 
+<view class="btn-find">
 <button class="page-body-button" type="primary" bindtap="bindJustFindTeacher">一键找老师</button>
-
+</view>
 
   <scroll-view scroll-y="true" class="page-body" bindscrolltolower="loadMore">
     <!--list-->

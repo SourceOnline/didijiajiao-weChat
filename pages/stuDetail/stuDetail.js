@@ -1,42 +1,77 @@
 // pages/stuDetail/stuDetail.js
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: ["list0", "list1", "list2", "list3", "list4", "list5", "list11", "list12", "list13", "list14", "list15", "list25", "list26", "list27", "list28", "list29", "list30"],
-    toView: ""
+    order:null
   },
-  jumpTo: function (e) {
 
-    // 获取标签元素上自定义的 data-opt 属性的值
-    let target = e.currentTarget.dataset.opt;
-
-    this.setData({
-      toView: target
+  //接单
+  bindAccept:function(e){
+    console.log(e)
+    wx.request({
+      url: app.api.BASE_PATH + app.api.order.acceptTask,
+      data: {
+        token: app.globalData.token,
+        orderId: e.currentTarget.dataset.oid
+      },
+      method: "GET",
+      complete: function (res) {
+        if (res == null || res.data == null) {
+          reject(new Error('网络请求失败'))
+        }
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.status == 1) {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'success',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 2000)
+        }else{
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      fail: function () {
+        console.log('error!!!!!!!!!!!!!!')
+      }
     })
-
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
+    var that = this;
+    wx.request({
+      url: app.api.BASE_PATH + app.api.order.orderDetail,
+      data: {
+        token: app.globalData.token,
+        orderId:options.oid
+      },
+      method: "GET",
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          order: res.data.data.order
+        });
+      },
+      fail: function () {
+        console.log('error!!!!!!!!!!!!!!')
+      }
+    })
+  }
 
 })

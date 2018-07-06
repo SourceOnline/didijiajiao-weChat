@@ -64,19 +64,15 @@ Page({
       })
     }
   },
-
-  //获取用户信息
-  getDiDiUserInfo: function(){
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
+  //获取app用户信息并登陆转跳首页
+  getDiDiUserInfo: function () {
     wx.request({
-      url: HOST + '/api/user/getUser',
+      url: app.api.BASE_PATH + app.api.user.getUser,
       data: {
-        token: token
+        token: app.globalData.token
       },
       method: "GET",
       complete: function (res) {
-        console.log(res.data)
         if (res == null || res.data == null) {
           reject(new Error('网络请求失败'))
         }
@@ -84,71 +80,20 @@ Page({
       success: function (res) {
         if (res.data.status == 1) {
           app.globalData.user = res.data.data.user
+          console.log("获取用户信息app")
           console.log(app.globalData.user)
-          
+
           wx.showToast({
             title: '欢迎您：' + res.data.data.user.name,
             icon: 'success',
             duration: 2000
           })
+
+          setTimeout(function () {
+            wx.navigateBack()
+          }, 2000)
         }
       }
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 })

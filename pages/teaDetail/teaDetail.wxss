@@ -110,3 +110,21 @@
   font-size: 12px;
   float: left;
 }
+
+
+/*锚点*/
+.scr {
+  position: relative;
+  height: 500rpx;
+}
+
+.test {
+  height: 80rpx;
+}
+
+.list {
+  position: fixed;
+  z-index: 9;
+  top: 30rpx;
+  right: 10rpx;
+}

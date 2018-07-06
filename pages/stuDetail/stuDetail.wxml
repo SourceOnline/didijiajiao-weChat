@@ -1,13 +1,48 @@
 <!--pages/stuDetail/stuDetail.wxml-->
-<view class="list">
-    <view bindtap="jumpTo" data-opt="list0">list0</view>
-    <view bindtap="jumpTo" data-opt="list11">list11</view>
-    <view bindtap="jumpTo" data-opt="list29">list29</view>
+
+<view class="i-cell">
+  <view class="i-cell-icon"></view>
+  <view class="i-cell-bd">
+    <view class="i-cell-text-hd">姓名 :</view>
+  </view>
+  <view class="i-cell-ct">{{order.learnUserName}}</view>
 </view>
 
+<view class="i-cell">
+  <view class="i-cell-text-hd">科目 :</view>
+  <view class="i-cell-ct">{{order.subjectName}}</view>
+</view>
 
-<scroll-view  scroll-into-view="{{toView}}"  scroll-y="true"   scroll-with-animation="true"   class="scr">
-    <view wx:for="{{list}}"  id="{{item}}"  class="test">
-      {{item}}
-    </view>
-</scroll-view>
+<view class="i-cell">
+  <view class="i-cell-text-hd">科目 :</view>
+  <view class="i-cell-ct">{{order.subjectName}}</view>
+</view>
+
+<view class="i-cell">
+  <view class="i-cell-text-hd">年级 :</view>
+  <view class="i-cell-ct">{{order.gradeName}}</view>
+</view>
+
+<view class="i-cell">
+  <view class="i-cell-text-hd">价格 :</view>
+  <view class="i-cell-ct">{{order.price}}</view>
+</view>
+
+<view class="i-cell">
+  <view class="i-cell-text-hd">地址 :</view>
+  <view class="i-cell-ct">{{order.address}}</view>
+</view>
+
+<view class="i-cell">
+  <view class="i-cell-text-hd">时间 :</view>
+  <view class="i-cell-ct">{{order.learnTime}}</view>
+</view>
+
+<view class="i-cell">
+  <view class="i-cell-text-hd">备注 :</view>
+  <view class="i-cell-ct">{{order.message}}</view>
+</view>
+
+<view class="btn-save">
+  <button class="page-body-button" type="primary" bindtap="bindAccept" data-oid="{{order.orderId}}">接单</button>
+</view>

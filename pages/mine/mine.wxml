@@ -30,6 +30,38 @@
       </view>
     </view>
 
+    <view class="i-grid-item" style="width: 33.33%" bindtap="bindTest">
+      <view class="i-grid-icon">
+        <image src="../../images/index_icon.png" />
+      </view>
+      <view class="i-grid-label">test</view>
+    </view>
+
+    <view class="i-grid-item" style="width: 33.33%" bindtap="bindLogin">
+      <view class="i-grid-icon">
+        <image src="../../images/index_icon.png" />
+      </view>
+      <view class="i-grid-label">登陆</view>
+    </view>
+
+    <view class="i-grid-item" style="width: 33.33%" bindtap="bindUserMsg">
+      <view class="i-grid-icon">
+        <image src="../../images/index_icon.png" />
+      </view>
+      <view class="i-grid-label">资料</view>
+    </view>
+
+    <!-- <view class="i-grid-item" style="width: 33.33%" url='../userMsg/userMsg'>
+      <view class="i-grid-icon">
+        <image src="../../images/index_icon.png" />
+      </view>
+      <view class="i-grid-label">资料2</view>
+    </view>-->
+
 
   </view>
+
+  <button class="page-body-button" type="primary" bindtap="upimg">上传图片</button>
+  <image src="{{tempFilePaths[0]}}"></image>
+
 </view>

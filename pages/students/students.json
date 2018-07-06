@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "周边学生"
+  "navigationBarTitleText": "周边学生",
+  "enablePullDownRefresh": true
 }

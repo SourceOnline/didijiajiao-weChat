@@ -31,6 +31,7 @@ Page({
     that.getCity();
     //查询周边教师
     that.findTeacher();
+    console.log(app.user)
     
   },
   //一键找老师

@@ -1,0 +1,28 @@
+<!--pages/userMsg/userMsg.wxml-->
+<view class="container">
+
+<view class="ar_brock"></view>
+
+<view class="i-panel">
+  <!-- <view class="i-panel-title">个人信息</view> -->
+  <view class="i-panel-content">
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">姓名</view>
+      <input class="i-input-input i-cell-bd" maxlength="10" placeholder="名字" type="text" value="{{ userName }}" bindinput="userNameInput">
+      </input>
+    </view>
+
+    <view class="i-cell i-input">
+      <view class="i-cell-hd i-input-title">联系电话</view>
+      <input class="i-input-input i-cell-bd" maxlength="20" placeholder="请输入手机号码" type="text" value="{{ phone }}" bindinput="phoneInput">
+      </input>
+    </view>
+
+  </view>
+</view>
+
+<i-button bind:click="handleClick" type="primary" bindtap="bindBook">保存</i-button>
+
+
+</view>
