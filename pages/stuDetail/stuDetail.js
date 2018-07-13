@@ -15,7 +15,7 @@ Page({
     wx.request({
       url: app.api.BASE_PATH + app.api.order.acceptTask,
       data: {
-        token: app.globalData.token,
+        token: app.user.token,
         orderId: e.currentTarget.dataset.oid
       },
       method: "GET",
@@ -58,7 +58,7 @@ Page({
     wx.request({
       url: app.api.BASE_PATH + app.api.order.orderDetail,
       data: {
-        token: app.globalData.token,
+        token: app.user.token,
         orderId:options.oid
       },
       method: "GET",

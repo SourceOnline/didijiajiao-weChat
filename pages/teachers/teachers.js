@@ -59,11 +59,11 @@ Page({
       var HOST = app.globalData.URL_PATH;
       console.log(HOST)
       wx.request({
-        url: HOST + '/api/order/findTeacher',
+        url: app.api.BASE_PATH + app.api.order.findTeacher,
         data: {
+          token: app.user.token,
           longitude: longitude,
-          latitude: latitude,
-          token: app.globalData.token
+          latitude: latitude
         },
         method: "GET",
         success: function (res) {

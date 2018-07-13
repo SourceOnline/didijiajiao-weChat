@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "申请成为教师",
+  "usingComponents": {
+    "i-button": "../../dist/button/index"
+  }
+}

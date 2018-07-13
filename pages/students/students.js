@@ -17,10 +17,11 @@ Page({
   },
   onReady: function() {
 
+  },
+  onShow:function(){
     //初始化数据
     var self = this;
     self.getFilter();
-
   },
   // 下拉刷新
   onPullDownRefresh: function() {
@@ -68,7 +69,7 @@ Page({
     wx.request({
       url: app.api.BASE_PATH + app.api.order.findStuSelect,
       data: {
-        token: app.globalData.token
+        token: app.user.token
       },
       method: "GET",
       success: function(res) {
@@ -127,6 +128,14 @@ Page({
 
   //加载数据
   getData: function(callback) {
+    console.log("周边学生加载数据")
+    //只有成为教师才能加载数据
+    if (!app.user.teacher) {
+        wx.navigateTo({
+          url: '../toTeacher/toTeacher',
+        })
+      return;
+    }
     var self = this;
     wx.showToast({
       title: '加载中...',
@@ -136,15 +145,16 @@ Page({
     wx.request({
       url: app.api.BASE_PATH + app.api.order.findStudent,
       data: {
-        token: app.globalData.token,
+        token: app.user.token,
         page: self.data.page,
         order: self.data.select_order,
         grade: self.data.select_grade,
-        subjectId: self.data.select_subject
+        subjectId: self.data.select_subject,
+        longitude: app.location.longitude,
+        latitude: app.location.latitude
       },
       method: "GET",
       success: function(res) {
-        console.log("加载数据")
         console.log(res)
         self.dataFormat(res);
       },

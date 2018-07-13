@@ -1,0 +1,3 @@
+<!--pages/toTeacher/toTeacher.wxml-->
+
+<button class="page-body-button" type="primary" bindtap="bindToTeacher">申请</button>

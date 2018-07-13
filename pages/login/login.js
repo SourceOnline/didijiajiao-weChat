@@ -51,7 +51,7 @@ Page({
         },
         success: function (res) {
           if (res.data.status == 1) {
-            app.globalData.token = res.data.data.token
+            app.user.token = res.data.data.token
             that.getDiDiUserInfo();
           } else {
             wx.showToast({
@@ -69,7 +69,7 @@ Page({
     wx.request({
       url: app.api.BASE_PATH + app.api.user.getUser,
       data: {
-        token: app.globalData.token
+        token: app.user.token
       },
       method: "GET",
       complete: function (res) {
@@ -79,9 +79,9 @@ Page({
       },
       success: function (res) {
         if (res.data.status == 1) {
-          app.globalData.user = res.data.data.user
+          app.user = res.data.data.user
           console.log("获取用户信息app")
-          console.log(app.globalData.user)
+          console.log(app.user)
 
           wx.showToast({
             title: '欢迎您：' + res.data.data.user.name,

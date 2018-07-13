@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "周边教员",
-      "usingComponents": {
-        "i-button": "../../dist/button/index",
-        "i-panel": "../../dist/panel/index"
-      }
+  "usingComponents": {
+    "i-button": "../../dist/button/index",
+    "i-panel": "../../dist/panel/index"
+  }
 }

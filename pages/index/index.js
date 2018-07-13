@@ -10,9 +10,9 @@ Page({
     localCity: "定位中...",
     //默认未获取地址
     hasLocation: false,
-    url_path:null
+    url_path: null
   },
-  onLoad: function () {
+  onLoad: function() {
     //检测用户登陆
     if (!app.globalData.userInfo) {
       wx.navigateTo({
@@ -23,25 +23,25 @@ Page({
       url_path: app.globalData.URL_PATH
     })
   },
-  onShow: function () {
+  onShow: function() {
     var that = this
-    //获取当前经纬度
-    that.getLocation()
-    //获取当前城市
-    that.getCity();
+    if (that.data.localCity == "定位中...") {
+      console.log("loca---------------")
+      //获取当前经纬度
+      that.getLocation()
+    }
+
     //查询周边教师
     that.findTeacher();
-    console.log(app.user)
-    
   },
   //一键找老师
-  bindJustFindTeacher: function(){
+  bindJustFindTeacher: function() {
     wx.navigateTo({
       url: '../book/book'
     })
   },
-  //设置城市
-  getCity: function () {
+  //根据当前经纬度设置当前位置信息
+  getCity: function() {
     var that = this
     qqmapsdk = new QQMapWX({
       key: app.QQMapWXKey // 必填
@@ -53,23 +53,24 @@ Page({
         longitude: app.location.longitude,
         get_poi: 0 //是否返回周边POI列表：1.返回；0不返回(默认)
       },
-      success: function (res) {
+      success: function(res) {
         console.log("获取城市")
         console.log(res)
+        var ac = res.result.address_component
         that.setData({
-          localCity: res.result.address_component.city
+          localCity: ac.district + ac.street_number
         })
       }
     });
   },
 
   //获取经纬度
-  getLocation: function (e) {
+  getLocation: function(e) {
     var that = this
     wx.getLocation({
       //type：wgs84(是全球定位系统，获取的坐标，gcj02是国家测绘局给出的坐标)
-      type: 'gcj02',// 默认wgs84
-      success: function (res) {
+      type: 'gcj02', // 默认wgs84
+      success: function(res) {
         // success
         console.log("获取经纬度")
         console.log(res)
@@ -90,10 +91,12 @@ Page({
   },
 
   //地图选择位置
-  chooseLocation: function (e) {
+  chooseLocation: function(e) {
     var that = this
     wx.chooseLocation({
-      success: function (res) {
+      success: function(res) {
+        console.log("地图选址")
+        console.log(res)
         that.setData({
           hasLocation: true,
           location: {
@@ -107,24 +110,24 @@ Page({
         app.location.address = res.address
         that.getCity();
       },
-      fail: function () {
+      fail: function() {
         // fail
       },
-      complete: function () {
+      complete: function() {
         // complete
       }
     })
   },
 
   // 跳转至详情页
-  navigateDetail: function (e) {
+  navigateDetail: function(e) {
     wx.navigateTo({
       url: '../teaDetail/teaDetail?uid=' + e.currentTarget.dataset.uid
     })
   },
 
   // 加载更多
-  loadMore: function (e) {
+  loadMore: function(e) {
     console.log('加载更多')
     var curid = this.data.curIndex
 
@@ -138,17 +141,17 @@ Page({
   },
 
   // book预约
-  bookTap: function (e) {
+  bookTap: function(e) {
     wx.navigateTo({
       url: '../book/book?uid=' + e.currentTarget.dataset.uid
     })
   },
 
   //获取周边教员
-  findTeacher: function () {
+  findTeacher: function() {
     var that = this;
-    var lon = app.location.longitude;//经度，浮点
-    var lat = app.location.latitude;//维度，浮点
+    var lon = app.location.longitude; //经度，浮点
+    var lat = app.location.latitude; //维度，浮点
     if (lon.length == 0 || lat.length == 0) {
       wx.showToast({
         title: '未能定位到当前位置',
@@ -158,15 +161,15 @@ Page({
     } else {
       var HOST = app.globalData.URL_PATH;
       wx.request({
-        url: HOST + '/api/order/findTeacher',
+        url: app.api.BASE_PATH + app.api.order.findTeacher,
         data: {
+          token: app.user.token,
           longitude: lon,
-          latitude: lat,
-          token: app.globalData.token
+          latitude: lat
         },
         method: "GET",
-        success: function (res) {
-          if (null != res.data.data){
+        success: function(res) {
+          if (null != res.data.data) {
             that.setData({
               teachers: res.data.data.teachers
             })

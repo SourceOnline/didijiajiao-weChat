@@ -49,13 +49,11 @@ Page({
     console.log(e)
     var that = this
     var addressid = e.currentTarget.dataset.addressid
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
     var that = this;
     wx.request({
-      url: HOST + '/api/address/delete',
+      url: app.api.BASE_PATH + app.api.address.a_delete,
       data: {
-        token: token,
+        token: app.user.token,
         addressId: addressid
       },
       method: "GET",
@@ -87,8 +85,6 @@ Page({
         }
       }
     })
-
-
   },
   //添加地址
   bindAdd: function () {
@@ -107,13 +103,11 @@ Page({
 
   //获取存储位置列表
   getList: function () {
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
     var that = this;
     wx.request({
-      url: HOST + '/api/address/getList',
+      url: app.api.BASE_PATH + app.api.address.getList,
       data: {
-        token: token
+        token: app.user.token,
       },
       method: "GET",
       complete: function (res) {

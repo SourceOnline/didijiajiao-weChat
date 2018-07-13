@@ -64,7 +64,7 @@ Page({
       wx.request({
         url: app.api.BASE_PATH + url,
         data: {
-          token: app.globalData.token,
+          token: app.user.token,
           orderId: that.data.oid
         },
         method: "GET",
@@ -156,7 +156,7 @@ Page({
     wx.request({
       url: app.api.BASE_PATH + app.api.order.myTasks,
       data: {
-        token: app.globalData.token,
+        token: app.user.token,
         page: self.data.page,
         status: status
       },

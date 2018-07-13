@@ -2,11 +2,11 @@
   "debug": true,
   "pages": [
     "pages/index/index",
-    "pages/main/main",
     "pages/wxlogin/wxlogin",
     "pages/login/login",
     "pages/students/students",
     "pages/stuDetail/stuDetail",
+    "pages/toTeacher/toTeacher",
     "pages/teachers/teachers",
     "pages/teaDetail/teaDetail",
     "pages/book/book",
@@ -16,7 +16,6 @@
     "pages/address/address",
     "pages/addressAdd/addressAdd",
     "pages/task/task",
-    "pages/atest/atest",
     "pages/userMsg/userMsg"
   ],
   "window": {

@@ -75,12 +75,11 @@ Page({
   //提交预约
   bindBook: function() {
     //发布家教任务
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
     var that = this;
     wx.request({
-      url: HOST + '/api/order/askForTeach',
+      url: app.api.BASE_PATH + app.api.order.askForTeach,
       data: {
+        token: app.user.token,
         teacherUser: that.data.userId,
         userName: that.data.userName,
         phone: that.data.phone,
@@ -89,8 +88,7 @@ Page({
         learnTime: that.data.learnTime,
         price: that.data.price,
         addressId: that.data.addressList[that.data.addrIndex].addressId,
-        address: that.data.address[that.data.addrIndex],
-        token: token
+        address: that.data.address[that.data.addrIndex]
       },
       method: "GET",
       complete: function(res) {
@@ -126,13 +124,11 @@ Page({
 
   //获取存储位置列表
   getAddressList: function() {
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
     var that = this;
     wx.request({
-      url: HOST + '/api/address/getList',
+      url: app.api.BASE_PATH + app.api.address.getList,
       data: {
-        token: token
+        token: app.user.token,
       },
       method: "GET",
       complete: function(res) {

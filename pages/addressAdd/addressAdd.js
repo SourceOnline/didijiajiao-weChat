@@ -73,16 +73,15 @@ Page({
   setHome: function(address_component, location) {
     console.log(address_component)
     console.log(location)
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
     var that = this;
     var isDefault =0 ;
     if (that.data.checked){
       isDefault =1;
     }
     wx.request({
-      url: HOST + '/api/address/setHome',
+      url: app.api.BASE_PATH + app.api.address.setHome,
       data: {
+        token: app.user.token,
         addressId: that.data.addressid,
         userName: that.data.data_name,
         phone: that.data.data_phone,
@@ -97,8 +96,7 @@ Page({
         streetNumber: address_component.street_number,
         addressName: location.name,
         addressDetail: location.address,
-        def: isDefault,
-        token: token
+        def: isDefault
       },
       method: "GET",
       complete: function(res) {
@@ -155,14 +153,12 @@ Page({
    * 查询地址详情
    */
   getAddressDetail: function(addressid) {
-    var HOST = app.globalData.URL_PATH;
-    var token = app.globalData.token;
     var that = this;
     wx.request({
-      url: HOST + '/api/address/getDetail',
+      url: app.api.BASE_PATH + app.api.address.getDetail,
       data: {
-        addressId: addressid,
-        token: token
+        token: app.user.token,
+        addressId: addressid
       },
       method: "GET",
       complete: function(res) {
@@ -214,8 +210,8 @@ Page({
     var that = this
 
     that.setData({
-      data_name: app.globalData.user.name,
-      data_phone: app.globalData.user.mobile,
+      data_name: app.user.name,
+      data_phone: app.user.phone,
       data_addr_name: app.location.name,
       data_addr_detail: app.location.address,
       alocation: app.location,

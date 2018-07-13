@@ -1,8 +1,8 @@
 <!--pages/mine/mine.wxml-->
 <view class="container">
   <view class="header">
-    <image class="avatar" src="{{userInfo.avatarUrl}}" bindtap="bindToUser" />
-    <view class="nickname">{{userInfo.nickName}}</view>
+    <image class="avatar" src="{{url_path}}{{user.avatar}}" bindtap="bindToUser" bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindlongtap="bingLongTap" />
+    <view class="nickname">{{user.name}}</view>
   </view>
 
   <view class="i-grid">
@@ -30,12 +30,14 @@
       </view>
     </view>
 
-    <view class="i-grid-item" style="width: 33.33%" bindtap="bindTest">
+    <view class="i-row">
+
+    <!-- <view class="i-grid-item" style="width: 33.33%" bindtap="bindTest">
       <view class="i-grid-icon">
         <image src="../../images/index_icon.png" />
       </view>
       <view class="i-grid-label">test</view>
-    </view>
+    </view> -->
 
     <view class="i-grid-item" style="width: 33.33%" bindtap="bindLogin">
       <view class="i-grid-icon">
@@ -51,6 +53,8 @@
       <view class="i-grid-label">资料</view>
     </view>
 
+    </view>
+
     <!-- <view class="i-grid-item" style="width: 33.33%" url='../userMsg/userMsg'>
       <view class="i-grid-icon">
         <image src="../../images/index_icon.png" />
@@ -61,7 +65,13 @@
 
   </view>
 
-  <button class="page-body-button" type="primary" bindtap="upimg">上传图片</button>
-  <image src="{{tempFilePaths[0]}}"></image>
+  <!-- <button class="page-body-button" type="primary" bindtap="upimg">更换头像</button>
+  <image src="{{tempFilePaths[0]}}" hidden='true'></image> -->
+
+  <button class="page-body-button" type="primary" bindtap="bindTest">测试</button>
+
+ 
 
 </view>
+
+ <i-action-sheet visible="{{ imgvisible }}" actions="{{ imgactions }}" show-cancel bind:cancel="imgHandleCancel" bind:click="imgHandleClickItem" />

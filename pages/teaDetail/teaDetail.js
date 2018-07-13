@@ -48,10 +48,10 @@ Page({
     var that = this;
     var HOST = app.globalData.URL_PATH;
     wx.request({
-      url: HOST + '/api/teacher/teacherDetail',
+      url: app.api.BASE_PATH + app.api.teacher.teacherDetail,
       data: {
-        userId: userId,
-        token: app.globalData.token
+        token: app.user.token,
+        userId: userId
       },
       method: "GET",
       success: function (res) {

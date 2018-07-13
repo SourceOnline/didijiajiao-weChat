@@ -53,9 +53,9 @@ Page({
   //获取app用户信息并登陆转跳首页
   getDiDiUserInfo: function () {
     wx.request({
-      url: app.api.BASE_PATH + app.api.user.getUser,
+      url: app.api.BASE_PATH + app.api.loginByOpenId,
       data: {
-        token: app.globalData.token
+        openId: app.globalData.openid
       },
       method: "GET",
       complete: function (res) {
@@ -78,6 +78,11 @@ Page({
           setTimeout(function () {
             wx.navigateBack()
           }, 1000)
+        }else{
+          //错误，用户未注册
+          wx.navigateTo({
+            url: '../userMsg/userMsg?nouser=1',
+          })
         }
       }
     })
