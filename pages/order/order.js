@@ -1,6 +1,7 @@
 // pages/order/order.js
 var app = getApp();
 var selectValue = require('../../utils/myOrderSelect.js');
+var fileData = require('../../utils/data.js')
 Page({
   /**
    * 页面的初始数据
@@ -60,44 +61,55 @@ Page({
       if (detail.index == 3) {
         url = app.api.order.cancleOrder
       }
-
-      wx.request({
-        url: app.api.BASE_PATH + url,
-        data: {
-          token: app.user.token,
-          orderId: that.data.oid
-        },
-        method: "GET",
-        success: function(res) {
-          console.log("弹窗事件结果")
-          console.log(res)
-          if (res.data.status == 1) {
-            wx.showToast({
-              title: res.data.message,
-              icon: 'success',
-              duration: 2000
-            })
-            setTimeout(function() {
-              //初始化
-              that.initData();
-            }, 2000)
-          } else {
-            wx.showToast({
-              title: res.data.message,
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        },
-        fail: function() {
-          console.log('error!!!!!!!!!!!!!!')
-        }
-      })
+      if(app.static_data){
+        wx.showToast({
+          title: "操作成功",
+          icon: 'success',
+          duration: 2000
+        })
+      }else{
+        that.finishOrCancleOrder(url)
+      }
     }
     //关闭弹窗菜单
     that.setData({
       visibleSelect: false
     });
+  },
+  //完成撤销订单
+  finishOrCancleOrder:function(url){
+    wx.request({
+      url: app.api.BASE_PATH + url,
+      data: {
+        token: app.user.token,
+        orderId: that.data.oid
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("弹窗事件结果")
+        console.log(res)
+        if (res.data.status == 1) {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'success',
+            duration: 2000
+          })
+          setTimeout(function () {
+            //初始化
+            that.initData();
+          }, 2000)
+        } else {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      fail: function () {
+        console.log('error!!!!!!!!!!!!!!')
+      }
+    })
   },
   //切换标签页
   handleChange({
@@ -145,8 +157,24 @@ Page({
     });
     that.getData(that.data.current);
   },
+  //展示静态数据
+  staticData: function () {
+    var that = this;
+    that.setData({
+      url_path: app.api.BASE_PATH,
+      data: fileData.myOrders(),
+      disabled: true,
+      moreTxt: "已加载全部数据",
+      hasMore: true,
+      dataNull: true
+    });
+  },
   //加载数据
   getData: function(status) {
+    if (app.static_data) {
+      this.staticData();
+      return;
+    }
     var self = this;
     wx.showToast({
       title: '加载中...',

@@ -1,5 +1,6 @@
 // index/list.js  
 var app = getApp();
+var fileData = require('../../utils/data.js')
 Page({
   data: {
     data: [], //数据
@@ -18,10 +19,18 @@ Page({
   onReady: function() {
 
   },
-  onShow:function(){
-    //初始化数据
+  onShow: function() {
     var self = this;
-    self.getFilter();
+    if (app.static_data) {
+      //静态数据
+      self.setData({
+        filterList: fileData.stuSelect()
+      });
+      self.staticData();
+    } else {
+      //初始化数据
+      self.getFilter();
+    }
   },
   // 下拉刷新
   onPullDownRefresh: function() {
@@ -34,7 +43,7 @@ Page({
       data: []
     });
     that.getData();
-    setTimeout(function () {
+    setTimeout(function() {
       // 隐藏导航栏加载框
       wx.hideNavigationBarLoading();
       // 停止下拉动作
@@ -125,15 +134,29 @@ Page({
     //数据筛选
     self.getData();
   },
-
+  //展示静态数据
+  staticData:function(){
+    var that = this;
+    that.setData({
+      url_path: app.api.BASE_PATH,
+      data: fileData.findStudent(),
+      disabled: true,
+      moreTxt: "已加载全部数据",
+      hasMore: true,
+      dataNull: true
+    });
+  },
   //加载数据
   getData: function(callback) {
-    console.log("周边学生加载数据")
+    if (app.static_data) {
+      this.staticData();
+      return;
+    }
     //只有成为教师才能加载数据
     if (!app.user.teacher) {
-        wx.navigateTo({
-          url: '../toTeacher/toTeacher',
-        })
+      wx.navigateTo({
+        url: '../toTeacher/toTeacher',
+      })
       return;
     }
     var self = this;
@@ -155,6 +178,7 @@ Page({
       },
       method: "GET",
       success: function(res) {
+        console.log("周边学生加载数据")
         console.log(res)
         self.dataFormat(res);
       },
@@ -170,7 +194,7 @@ Page({
         console.log('has data')
         var datas = this.data.data.concat(d.data.data.rows),
           flag = d.data.data.rows.length < 10;
-        if (datas.length == d.data.data.total){
+        if (datas.length == d.data.data.total) {
           flag = true
         }
         this.setData({

@@ -10,9 +10,9 @@ function packAddress(arr) {
     // }
     newAddr[i] = arr[i].addressNameAndDoor
   }
-
   return newAddr
 }
+
 module.exports = {
   packAddress: packAddress,
 }

@@ -16,47 +16,31 @@ Page({
     endTime: 0,
     imgvisible: false,
     imgactions: [{
-      name: '从相册选择',
-    },
-    {
-      name: '拍照'
-    }
+        name: '从相册选择',
+      },
+      {
+        name: '拍照'
+      }
     ],
   },
-  // //头像弹窗选择
-  // imgHandleClickItem({
-  //   detail
-  // }) {
-  //   console.log(detail)
-  //   if (detail.index == 0) {
-  //     that.upimg('album')
-  //   } else if (detail.index == 1) {
-  //     that.upimg('camera')
-  //   }
-  // },
-  // //头像弹窗，取消
-  // imgHandleCancel() {
-  //   this.setData({
-  //     imgvisible: false
-  //   });
-  // },
+
   //触摸开始
-  bindTouchStart: function (e) {
+  bindTouchStart: function(e) {
     this.startTime = e.timeStamp;
   },
   //触摸结束
-  bindTouchEnd: function (e) {
+  bindTouchEnd: function(e) {
     this.endTime = e.timeStamp;
   },
 
   //长按事件-更换头像
-  bingLongTap: function (e) {
+  bingLongTap: function(e) {
     console.log(e)
     var that = this;
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       //itemColor: "#CED63A",
-      success: function (res) {
+      success: function(res) {
         if (!res.cancel) {
           if (res.tapIndex == 0) {
             that.upimg('album')
@@ -72,12 +56,12 @@ Page({
     // });
   },
 
-  upimg: function (stype) {
+  upimg: function(stype) {
     wx.chooseImage({
       count: 1, // 照片数量， 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: [stype], // 可以指定来源是相册还是相机，默认二者都有：'album', 'camera'
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         var data = {
           program_id: app.jtappid,
@@ -92,7 +76,7 @@ Page({
           filePath: tempFilePaths[0],
           name: 'file', //文件对应的参数名字(key)
           formData: data, //其它的表单信息
-          success: function (res) {
+          success: function(res) {
             console.log(res)
             var data = res.data
             console.log(data)
@@ -116,7 +100,7 @@ Page({
   },
 
   //头像点击事件，事件转跳用户详情
-  bindToUser: function () {
+  bindToUser: function() {
     if (this.endTime - this.startTime < 350) {
       wx.navigateTo({
         url: '../user/user',
@@ -124,47 +108,47 @@ Page({
     }
   },
   //事件转跳订单详情
-  bindOrder: function () {
+  bindOrder: function() {
     wx.navigateTo({
       url: '../order/order',
     })
   },
   //事件转跳地址
-  bindToAddress: function () {
+  bindToAddress: function() {
     wx.navigateTo({
       url: '../address/address',
     })
   },
   //事件转跳任务
-  bindTask: function () {
+  bindTask: function() {
     wx.navigateTo({
       url: '../task/task',
     })
   },
 
   //事件login
-  bindLogin: function () {
+  bindLogin: function() {
     wx.navigateTo({
       url: '../login/login',
     })
   },
 
   //事件login
-  bindUserMsg: function () {
+  bindUserMsg: function() {
     wx.navigateTo({
       url: '../userMsg/userMsg',
     })
   },
 
   //测试
-  bindTest: function (e) {
+  bindTest: function(e) {
     console.log(e)
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     if (app.user) {
       this.setData({
         user: app.user,
@@ -172,5 +156,4 @@ Page({
       })
     }
   },
-
 })

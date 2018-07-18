@@ -31,7 +31,7 @@ Page({
       that.teacherDetail(options.uid)
     }
     that.setData({
-      url_path: app.globalData.URL_PATH
+      url_path: app.api.BASE_PATH
     })
   },
 
@@ -46,7 +46,6 @@ Page({
   teacherDetail: function (userId) {
     console.log("获取教师信息")
     var that = this;
-    var HOST = app.globalData.URL_PATH;
     wx.request({
       url: app.api.BASE_PATH + app.api.teacher.teacherDetail,
       data: {

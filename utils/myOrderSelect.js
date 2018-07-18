@@ -9,7 +9,7 @@ function getSelectValue(tp) {
     case '0'://待处理订单
       back = [{
           id: 2,
-          name: '服务已完成'
+          name: '完成订单'
         },
         {
           id: 3,
@@ -24,7 +24,7 @@ function getSelectValue(tp) {
     case '1'://服务中订单
       back = [{
         id: 2,
-        name: '服务已完成'
+        name: '完成订单'
       },
       {
         id: 3,

@@ -1,7 +1,7 @@
 // pages/wxlogin/wxlogin.js
 //获取应用实例
 const app = getApp()
-
+var fileData = require('../../utils/data.js')
 Page({
   data: {
     userInfo: {},
@@ -39,6 +39,8 @@ Page({
         }
       })
     }
+    //静态数据
+    app.user = fileData.getUser()
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -47,11 +49,17 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-    // wx.navigateBack()
     this.getDiDiUserInfo()
   },
   //获取app用户信息并登陆转跳首页
   getDiDiUserInfo: function () {
+    if (app.static_data){
+      //前往注册信息
+      wx.navigateTo({
+        url: '../userMsg/userMsg?nouser=1',
+      })
+      return;
+    }
     wx.request({
       url: app.api.BASE_PATH + app.api.loginByOpenId,
       data: {

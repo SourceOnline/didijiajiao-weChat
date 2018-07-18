@@ -4,7 +4,7 @@ var app = getApp()
 // 引入SDK核心类
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var qqmapsdk;
-
+var fileData = require('../../utils/data.js')
 Page({
   data: {
     localCity: "定位中...",
@@ -20,7 +20,7 @@ Page({
       })
     }
     this.setData({
-      url_path: app.globalData.URL_PATH
+      url_path: app.api.BASE_PATH
     })
   },
   onShow: function() {
@@ -30,9 +30,18 @@ Page({
       //获取当前经纬度
       that.getLocation()
     }
-
-    //查询周边教师
-    that.findTeacher();
+    
+    
+    if (app.static_data){
+      //静态数据
+      that.setData({
+        teachers: fileData.findTeacher()
+      })
+    }else{
+      //查询周边教师
+      that.findTeacher();
+    }
+    
   },
   //一键找老师
   bindJustFindTeacher: function() {
@@ -159,7 +168,6 @@ Page({
         duration: 2000
       })
     } else {
-      var HOST = app.globalData.URL_PATH;
       wx.request({
         url: app.api.BASE_PATH + app.api.order.findTeacher,
         data: {
@@ -169,6 +177,8 @@ Page({
         },
         method: "GET",
         success: function(res) {
+          console.log("获取周边教员")
+          console.log(res)
           if (null != res.data.data) {
             that.setData({
               teachers: res.data.data.teachers

@@ -19,10 +19,12 @@ Page({
     data_addr_name: null,
     data_addr_detail: null,
     data_door: null,
-    checked: false,
-    disabled: false,
+    checked: false, //是否默认地址
+    //disabled: false,
   },
-  handleDefChange({ detail = {} }) {
+  handleDefChange({
+    detail = {}
+  }) {
     this.setData({
       checked: detail.current
     });
@@ -74,9 +76,22 @@ Page({
     console.log(address_component)
     console.log(location)
     var that = this;
-    var isDefault =0 ;
-    if (that.data.checked){
-      isDefault =1;
+    if (app.static_data) {
+      wx.showToast({
+        title: "操作成功",
+        icon: 'success',
+        duration: 2000
+      })
+      setTimeout(function () {
+        wx.navigateBack({
+          delta: 1
+        })
+      }, 2000)
+      return;
+    }
+    var isDefault = 0;
+    if (that.data.checked) {
+      isDefault = 1;
     }
     wx.request({
       url: app.api.BASE_PATH + app.api.address.setHome,
@@ -104,9 +119,11 @@ Page({
         if (res == null || res.data == null) {
           reject(new Error('网络请求失败'))
         }
-        wx.navigateBack({
-          delta: 1
-        })
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000)
       },
       success: function(res) {
         if (res.data.status == 1) {
@@ -154,11 +171,20 @@ Page({
    */
   getAddressDetail: function(addressid) {
     var that = this;
+    //静态数据
+    if (app.static_data) {
+      that.setData({
+        data_addr_detail: "风山别睡",
+        data_door: "B栋307",
+        checked: true,
+      })
+      return;
+    }
     wx.request({
       url: app.api.BASE_PATH + app.api.address.getDetail,
       data: {
         token: app.user.token,
-        addressId: addressid
+        addressId: addressid,
       },
       method: "GET",
       complete: function(res) {

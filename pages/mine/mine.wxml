@@ -68,7 +68,7 @@
   <!-- <button class="page-body-button" type="primary" bindtap="upimg">更换头像</button>
   <image src="{{tempFilePaths[0]}}" hidden='true'></image> -->
 
-  <button class="page-body-button" type="primary" bindtap="bindTest">测试</button>
+  <!-- <button class="page-body-button" type="primary" bindtap="bindTest">测试</button> -->
 
  
 

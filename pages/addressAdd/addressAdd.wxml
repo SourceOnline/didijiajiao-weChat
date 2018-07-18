@@ -22,7 +22,7 @@
       <input type="text" placeholder="门号,如：A栋302" placeholder-class="placeholder_style" name="data_door" value="{{data_door}}" />
     </view>
 
-    <i-radio value="是否设为默认地址" disabled="{{disabled}}" checked="{{checked}}" bindchange="handleDefChange">
+    <i-radio value="是否设为默认地址" disabled="false" checked="{{checked}}" bindchange="handleDefChange">
     </i-radio>
 
     <button class="save_btn" formType="submit">保存</button>

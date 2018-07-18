@@ -13,25 +13,25 @@ App({
         if (res.code && (!user.openid || (user.expires_in || Date.now()) < (Date.now() + 600))) {
           var d = that.globalData; //这里存储了appid、secret、token串  
           var l = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + d.appid + '&secret=' + d.secret + '&js_code=' + res.code + '&grant_type=authorization_code';
-          wx.request({
-            url: l,
-            data: {},
-            method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
-            // header: {}, // 设置请求的 header  
-            success: function(res) {
-              console.log("获取openid")
-              console.log(res)
-              var obj = {};
-              obj.openid = res.data.openid;
-              obj.expires_in = Date.now() + res.data.expires_in;
+          // wx.request({
+          //   url: ll,
+          //   data: {},
+          //   method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
+          //   // header: {}, // 设置请求的 header  
+          //   success: function(res) {
+          //     console.log("获取openid")
+          //     console.log(res)
+          //     var obj = {};
+          //     obj.openid = res.data.openid;
+          //     obj.expires_in = Date.now() + res.data.expires_in;
 
-              that.globalData.openid = obj.openid;
-              that.globalData.expires_in = obj.expires_in;
-              // console.log(obj);
-              //{"session_key":"Ar5t4MQykLiSlhoIeD8EnA==","openid":"o1UjW5Y6GSSmuA50_xdA8XnuqVLI"}
-              wx.setStorageSync('user', obj); //存储openid  
-            }
-          });
+          //     that.globalData.openid = obj.openid;
+          //     that.globalData.expires_in = obj.expires_in;
+          //     // console.log(obj);
+          //     //{"session_key":"Ar5t4MQykLiSlhoIeD8EnA==","openid":"o1UjW5Y6GSSmuA50_xdA8XnuqVLI"}
+          //     wx.setStorageSync('user', obj); //存储openid  
+          //   }
+          // });
         }
       }
     })
@@ -59,12 +59,12 @@ App({
   },
   globalData: {
     userInfo: null,
-    URL_PATH: 'http://localhost:8012',
+    //URL_PATH: 'http://localhost:8012',
     //token: 'fc6e0ed6-bb4d-41e4-9617-eb5c3fdbd4bf', //abc
     //585e130a-dd15-434b-b612-e85427160822   //cc
     appid: 'wx350739bf81dddd4a', //appid
     secret: '34a210bac956f633a132df829aca8185', //secret，应该怎么加密不泄露？？
-    openid: null,
+    openid: 'o1UjW5Y6GSSmuA50_xdA8XnuqVLI',
     expires_in: null,
   },
   user: {
@@ -92,9 +92,10 @@ App({
     street: null, //街道
     street_number: null //街道和门号
   },
+  static_data: true,//是否静态数据
   //api接口
   api: {
-    BASE_PATH: 'http://localhost:8012', //服务器基本路径
+    BASE_PATH: 'http://192.168.1.110:8012', //服务器基本路径 192.168.1.110/localhost
     login: '/api/login', //登陆
     loginByOpenId: '/api/loginByOpenId', //根据openid登陆，返回用户信息user
     weRegister: '/api/weRegister', //微信注册信息，返回用户信息user
@@ -120,6 +121,10 @@ App({
       getList: '/api/address/getList', //获取地址列表
       setHome: '/api/address/setHome', //设置地址
       getDetail: '/api/address/getDetail', //获取地址详情
+    },
+    subject: {
+      getSubects: '/api/subject/getSubects', //询科目列表
+      getGrades: '/api/subject/getGrades', //查询年级列表
     },
     teacher: {
       teacherDetail: '/api/teacher/teacherDetail', //获取教师详情

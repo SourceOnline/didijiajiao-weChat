@@ -14,11 +14,6 @@
 </view>
 
 <view class="i-cell">
-  <view class="i-cell-text-hd">科目 :</view>
-  <view class="i-cell-ct">{{order.subjectName}}</view>
-</view>
-
-<view class="i-cell">
   <view class="i-cell-text-hd">年级 :</view>
   <view class="i-cell-ct">{{order.gradeName}}</view>
 </view>

@@ -1,6 +1,7 @@
 // pages/task/task.js
 var app = getApp();
 var selectValue = require('../../utils/myOrderSelect.js');
+var fileData = require('../../utils/data.js')
 Page({
   /**
    * 页面的初始数据
@@ -145,8 +146,24 @@ Page({
     });
     that.getData(that.data.current);
   },
+  //展示静态数据
+  staticData: function () {
+    var that = this;
+    that.setData({
+      url_path: app.api.BASE_PATH,
+      data: fileData.myOrders(),
+      disabled: true,
+      moreTxt: "已加载全部数据",
+      hasMore: true,
+      dataNull: true
+    });
+  },
   //加载数据
   getData: function(status) {
+    if (app.static_data) {
+      this.staticData();
+      return;
+    }
     var self = this;
     wx.showToast({
       title: '加载中...',

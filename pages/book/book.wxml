@@ -34,14 +34,20 @@
 
     <view class="i-cell i-input">
       <view class="i-cell-hd i-input-title">科目</view>
-      <input class="i-input-input i-cell-bd" maxlength="10" placeholder="语文" type="text" value="{{ subject }}" bindinput="subjectInput">
-      </input>
+      <!-- <input class="i-input-input i-cell-bd" maxlength="10" placeholder="语文" type="text" value="{{ subject }}" bindinput="subjectInput">
+      </input> -->
+      <picker bindchange="bindSubjectPickerChange" value="{{subjectIndex}}" range="{{subject}}">
+        <text>{{subjectList[subjectIndex].subName}}</text>
+      </picker>
     </view>
 
     <view class="i-cell i-input">
       <view class="i-cell-hd i-input-title">年级</view>
-      <input class="i-input-input i-cell-bd" maxlength="10" placeholder="年级"  type="text" value="{{ grade }}" bindinput="gradeInput">
-      </input>
+      <!-- <input class="i-input-input i-cell-bd" maxlength="10" placeholder="年级"  type="text" value="{{ grade }}" bindinput="gradeInput">
+      </input> -->
+      <picker bindchange="bindGradesPickerChange" value="{{gradesIndex}}" range="{{grades}}">
+        <text>{{gradesList[gradesIndex].gradeName}}</text>
+      </picker>
     </view>
 
   </view>

@@ -1,22 +1,24 @@
 // pages/userMsg/userMsg.js
 //获取应用实例
 var app = getApp()
+var fileData = require('../../utils/data.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isCreate:false, //是否是注册用户
+    isCreate: false, //是否是注册用户
     userName: null,
     phone: null,
     sex: "男",
     sexSelect: [{
       id: 1,
       name: '男',
+      checked: 'true'
     }, {
       id: 2,
-      name: '女'
+      name: '女',
     }],
   },
 
@@ -34,29 +36,40 @@ Page({
     })
   },
   // 性别选择切换器
-  handleSexChange({
-    detail = {}
-  }) {
-    console.log(detail)
+  handleSexChange: function(e) {
+    console.log(e)
     this.setData({
-      sex: detail.value
+      sex: e.detail.value
     });
   },
 
   //保存
   bindSave: function(e) {
-    console.log(e)
-    console.log(this.data)
-    if(this.data.isCreate){
+    if (this.data.isCreate) {
       console.log("创建用户")
       this.weRegister();
-    }else{
+    } else {
       console.log("更新用户")
       this.updateUser()
     }
   },
   //注册用户
-  weRegister: function(){
+  weRegister: function() {
+    //静态数据
+    if (app.static_data) {
+      app.user = fileData.getUser()
+      wx.showToast({
+        title: '欢迎您：' + app.user.name,
+        icon: 'success',
+        duration: 1000
+      })
+      setTimeout(function() {
+        wx.navigateBack({
+          delta: 3
+        })
+      }, 1000)
+      return;
+    }
     wx.request({
       url: app.api.BASE_PATH + app.api.weRegister,
       data: {
@@ -66,12 +79,12 @@ Page({
         sex: this.data.sex,
       },
       method: "GET",
-      complete: function (res) {
+      complete: function(res) {
         if (res == null || res.data == null) {
           reject(new Error('网络请求失败'))
         }
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.status == 1) {
           app.user = res.data.data.user
           //app.globalData.token = res.data.data.user.tokenId
@@ -84,12 +97,12 @@ Page({
             duration: 1000
           })
 
-          setTimeout(function () {
+          setTimeout(function() {
             wx.navigateBack({
               delta: 3
             })
           }, 1000)
-        }else{
+        } else {
           wx.showToast({
             title: res.data.message,
             icon: 'none',
@@ -100,28 +113,43 @@ Page({
     })
   },
   //更新用户信息
-  updateUser :function(){
+  updateUser: function() {
+    //静态数据
+    if (app.static_data) {
+      app.user = fileData.getUser()
+      wx.showToast({
+        title: '欢迎您：' + app.user.name,
+        icon: 'success',
+        duration: 1000
+      })
+      setTimeout(function () {
+        wx.navigateBack({
+          delta: 1
+        })
+      }, 1000)
+      return;
+    }
     var that = this;
     wx.request({
       url: app.api.BASE_PATH + app.api.user.updateUser,
       data: {
-        token:app.user.token,
+        token: app.user.token,
         username: that.data.userName,
         phone: that.data.phone,
         sex: that.data.sex,
       },
       method: "GET",
-      complete: function (res) {
+      complete: function(res) {
         if (res == null || res.data == null) {
           reject(new Error('网络请求失败'))
         }
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.status == 1) {
           console.log("更新用户信息")
           console.log(res)
 
-          app.user.name = that.data.userName;// 用户真实姓名
+          app.user.name = that.data.userName; // 用户真实姓名
           app.user.phone = that.data.phone; // 手机号
           app.user.sex = that.data.sex; //性别，男、女
 
@@ -131,7 +159,7 @@ Page({
             duration: 1000
           })
 
-          setTimeout(function () {
+          setTimeout(function() {
             wx.navigateBack({
               delta: 1
             })
@@ -151,17 +179,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      userName: app.user.name,
+      phone: app.user.phone,
+      sex: app.user.sex,
+    })
+    //判断是否需要创建角色
+    if (options.nouser && options.nouser == 1) {
       this.setData({
-        userName: app.user.name,
-        phone: app.user.phone,
-        sex:app.user.sex,
+        isCreate: true
       })
-      //判断是否需要创建角色
-      if (options.nouser && options.nouser==1){
-        this.setData({
-          isCreate:true
-        })
-      }
+    }
   },
 
   /**

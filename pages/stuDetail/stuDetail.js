@@ -1,5 +1,6 @@
 // pages/stuDetail/stuDetail.js
 var app = getApp()
+var fileData = require('../../utils/data.js')
 Page({
 
   /**
@@ -12,6 +13,19 @@ Page({
   //接单
   bindAccept:function(e){
     console.log(e)
+    if(app.static_data){
+      wx.showToast({
+        title: "成功接单",
+        icon: 'success',
+        duration: 2000
+      })
+      setTimeout(function () {
+        wx.navigateBack({
+          delta: 1
+        })
+      }, 2000)
+      return;
+    }
     wx.request({
       url: app.api.BASE_PATH + app.api.order.acceptTask,
       data: {
@@ -50,16 +64,14 @@ Page({
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  //订单详情
+  orderDetail:function(){
     var that = this;
     wx.request({
       url: app.api.BASE_PATH + app.api.order.orderDetail,
       data: {
         token: app.user.token,
-        orderId:options.oid
+        orderId: options.oid
       },
       method: "GET",
       success: function (res) {
@@ -72,6 +84,17 @@ Page({
         console.log('error!!!!!!!!!!!!!!')
       }
     })
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    if(app.static_data){
+      this.setData({
+        order: fileData.orderDetail()
+      });
+    }else{
+      this.orderDetail()
+    }
   }
-
 })

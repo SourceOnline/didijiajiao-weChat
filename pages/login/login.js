@@ -34,10 +34,9 @@ Page({
         duration: 2000
       })
     } else {
-      var HOST = app.globalData.URL_PATH;
       var that = this;
       wx.request({
-        url: HOST + '/api/login',
+        url: app.api.BASE_PATH + '/api/login',
         data: {
           username: this.data.phone,
           password: this.data.pwd
